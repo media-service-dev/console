@@ -1,0 +1,13 @@
+{
+  "extends": [
+    "@mscs/eslint-config/node"
+  ],
+  "rules": {
+    "no-await-in-loop": "off",
+    "no-process-env": "off",
+    "no-magic-numbers": "off"
+  },
+  "ignorePatterns": [
+    "*.snap"
+  ]
+}

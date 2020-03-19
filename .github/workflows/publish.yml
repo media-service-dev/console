@@ -1,0 +1,46 @@
+name: Publish Package
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+
+      - run: yarn
+
+      - run: yarn run lint --no-error-on-unmatched-pattern
+
+      - run: yarn run test --ci
+
+      - run: yarn run build
+
+  publish-npm:
+    needs: build
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+          registry-url: https://registry.npmjs.org/
+
+      - run: yarn
+
+      - run: yarn run lint --no-error-on-unmatched-pattern
+
+      - run: yarn run test --ci
+
+      - run: yarn run build
+
+      - run: yarn publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}

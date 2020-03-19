@@ -1,0 +1,192 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Application run should displays the help if --help is passed 1`] = `
+"Description:
+  Lists commands
+
+Usage:
+  list [options] [--] [<namespace>]
+
+Arguments:
+  namespace             The namespace name
+
+Options:
+      --raw             To output raw command list
+      --format=FORMAT   The output format (txt or json) [default: \\"txt\\"]
+      --ansi            Force ANSI output
+      --no-ansi         Disable ANSI output
+  -h, --help            Display this help message
+  -q, --quiet           Do not output any message
+  -V, --version         Display this application version
+  -n, --no-interaction  Do not ask any interactive question
+  -v|vv|vvv, --verbose  Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
+
+Help:
+  The list command lists all commands:
+  
+  node bin/console list
+
+You can also display the commands for a specific namespace:
+
+  node bin/console list test
+
+You can also output the information in other formats by using the --format option:
+
+  node bin/console list --format=json
+
+It's also possible to get raw list of commands (useful for embedding command runner):
+
+  node bin/console list --raw
+"
+`;
+
+exports[`Application run should displays the help if -h is passed 1`] = `
+"Description:
+  Lists commands
+
+Usage:
+  list [options] [--] [<namespace>]
+
+Arguments:
+  namespace             The namespace name
+
+Options:
+      --raw             To output raw command list
+      --format=FORMAT   The output format (txt or json) [default: \\"txt\\"]
+      --ansi            Force ANSI output
+      --no-ansi         Disable ANSI output
+  -h, --help            Display this help message
+  -q, --quiet           Do not output any message
+  -V, --version         Display this application version
+  -n, --no-interaction  Do not ask any interactive question
+  -v|vv|vvv, --verbose  Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
+
+Help:
+  The list command lists all commands:
+  
+  node bin/console list
+
+You can also display the commands for a specific namespace:
+
+  node bin/console list test
+
+You can also output the information in other formats by using the --format option:
+
+  node bin/console list --format=json
+
+It's also possible to get raw list of commands (useful for embedding command runner):
+
+  node bin/console list --raw
+"
+`;
+
+exports[`Application run should displays the program version if --version is passed 1`] = `
+"UNKNOWN 0.1.0
+"
+`;
+
+exports[`Application run should displays the program version if -V is passed 1`] = `
+"UNKNOWN 0.1.0
+"
+`;
+
+exports[`Application run should runs the help command if --help is passed 1`] = `
+"Description:
+  Lists commands
+
+Usage:
+  list [options] [--] [<namespace>]
+
+Arguments:
+  namespace             The namespace name
+
+Options:
+      --raw             To output raw command list
+      --format=FORMAT   The output format (txt or json) [default: \\"txt\\"]
+      --ansi            Force ANSI output
+      --no-ansi         Disable ANSI output
+  -h, --help            Display this help message
+  -q, --quiet           Do not output any message
+  -V, --version         Display this application version
+  -n, --no-interaction  Do not ask any interactive question
+  -v|vv|vvv, --verbose  Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
+
+Help:
+  The list command lists all commands:
+  
+  node bin/console list
+
+You can also display the commands for a specific namespace:
+
+  node bin/console list test
+
+You can also output the information in other formats by using the --format option:
+
+  node bin/console list --format=json
+
+It's also possible to get raw list of commands (useful for embedding command runner):
+
+  node bin/console list --raw
+"
+`;
+
+exports[`Application run should runs the help command if -h is passed 1`] = `
+"Description:
+  Lists commands
+
+Usage:
+  list [options] [--] [<namespace>]
+
+Arguments:
+  namespace             The namespace name
+
+Options:
+      --raw             To output raw command list
+      --format=FORMAT   The output format (txt or json) [default: \\"txt\\"]
+      --ansi            Force ANSI output
+      --no-ansi         Disable ANSI output
+  -h, --help            Display this help message
+  -q, --quiet           Do not output any message
+  -V, --version         Display this application version
+  -n, --no-interaction  Do not ask any interactive question
+  -v|vv|vvv, --verbose  Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
+
+Help:
+  The list command lists all commands:
+  
+  node bin/console list
+
+You can also display the commands for a specific namespace:
+
+  node bin/console list test
+
+You can also output the information in other formats by using the --format option:
+
+  node bin/console list --format=json
+
+It's also possible to get raw list of commands (useful for embedding command runner):
+
+  node bin/console list --raw
+"
+`;
+
+exports[`Application run should runs the list command if no argument is passed 1`] = `
+"UNKNOWN 0.1.0
+
+Usage:
+  command [options] [arguments]
+
+Options:
+      --ansi            Force ANSI output
+      --no-ansi         Disable ANSI output
+  -h, --help            Display this help message
+  -q, --quiet           Do not output any message
+  -V, --version         Display this application version
+  -n, --no-interaction  Do not ask any interactive question
+  -v|vv|vvv, --verbose  Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
+
+Available commands:
+  help  Displays help for a command
+  list  Lists commands
+"
+`;
