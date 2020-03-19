@@ -26,7 +26,7 @@
   "devDependencies": {
     "@mscs/eslint-config": "media-service-dev/eslint-config#master",
     "@types/jest": "^25.1.3",
-    "@types/node": "^13.7.4",
+    "@types/node": "^13.9.2",
     "@types/semver": "^7.1.0",
     "@typescript-eslint/eslint-plugin": "^2.22.0",
     "clean-webpack-plugin": "^3.0.0",
