@@ -203,10 +203,10 @@ export class StyledOutput extends AbstractStyledOutput {
 
     // eslint-disable-next-line max-params
     private createBlock(messages: string[], type: string | null = null, style: string | null = null, prefix: string = " ", padding: boolean = false, escape: boolean = false) {
-        let indentLength = 0;
         const prefixLength = AbstractHelper.lengthWithoutDecoration(this.getFormatter(), prefix);
+        const lines: string[] = [];
+        let indentLength = 0;
         let lineIndention = "";
-        let lines: string[] = [];
 
         if (null !== type) {
             type = util.format("[%s] ", type);
@@ -225,7 +225,7 @@ export class StyledOutput extends AbstractStyledOutput {
             lines.push(...wrapped.split(os.EOL));
 
             if (messages.length > 1 && index < messages.length - 1) {
-                lines = [];
+                lines.push("");
             }
         }
 
