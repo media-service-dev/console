@@ -11,7 +11,7 @@
     "build": "webpack --config webpack.config.js --mode=production",
     "build:dev": "webpack --config webpack.config.js --mode=development",
     "build:watch": "webpack --config webpack.config.js --watch --mode=development",
-    "lint": "eslint ./src/**/* ./__tests__/**/*",
+    "lint": "eslint \"./src/**/*\" \"./__tests__/**/*\"",
     "test": "jest",
     "test:watch": "jest --watchAll",
     "docs": "typedoc --listInvalidSymbolLinks src/"
