@@ -325,9 +325,10 @@
     "@types/yargs" "^15.0.0"
     chalk "^3.0.0"
 
-"@mscs/eslint-config@media-service-dev/eslint-config#master":
-  version "0.1.0-DEV"
-  resolved "https://codeload.github.com/media-service-dev/eslint-config/tar.gz/d76afe2fb8cb2db83d349df813a88219a2cce3d1"
+"@mscs/eslint-config@^0.1.2":
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/@mscs/eslint-config/-/eslint-config-0.1.2.tgz#f86b44b8c388aef583b8318a08bea9bc2a4a7637"
+  integrity sha512-OA1+cfABOpWVM5M9kswON6nrQfWVFydnu8xz2I8lmIKMPnqd5xCRGuEUWzIIis0POtMjyNXq4uFdwL/j/HzIwA==
   dependencies:
     "@typescript-eslint/parser" "^2.24.0"
     typescript "^3.8.3"
