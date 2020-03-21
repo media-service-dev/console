@@ -1,8 +1,6 @@
 
 # @mscs/console
 
-**Version:** 0.1.0-DEV
-
 This is a library to write console applications in typescript for node.
 
 ## Installation
