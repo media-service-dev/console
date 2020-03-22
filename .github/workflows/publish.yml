@@ -16,7 +16,7 @@ jobs:
 
       - run: yarn
 
-      - run: yarn run lint --no-error-on-unmatched-pattern
+      - run: yarn run lint
 
       - run: yarn run test --ci
 
@@ -35,7 +35,7 @@ jobs:
 
       - run: yarn
 
-      - run: yarn run lint --no-error-on-unmatched-pattern
+      - run: yarn run lint
 
       - run: yarn run test --ci
 
