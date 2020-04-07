@@ -32,10 +32,15 @@ async function runtime() {
     await application.run();
 }
 
-runtime().catch(error => {
-    console.log(error);
-    process.exit(1);
-});
+runtime()
+    .catch(error => {
+        if (error instanceof Error) {
+            process.stderr.write(error.stack);
+        } else {
+            process.stderr.write(error);
+        }
+        process.exit(1);
+    });
 ```
 
 # Important note 
