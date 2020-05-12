@@ -9,9 +9,9 @@
 
 export class Terminal {
 
-    private static width: number;
+    private static width: number | null = null;
 
-    private static height: number;
+    private static height: number | null = null;
 
     private static defaultHeight: number = 50;
 
