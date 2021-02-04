@@ -2,7 +2,7 @@
   "name": "@mscs/console",
   "description": "NodeJS console library",
   "author": "Jason Schilling <jschilling@media-service.com>",
-  "version": "0.1.1-DEV",
+  "version": "0.1.1",
   "repository": "git@github.com:media-service-dev/console.git",
   "types": "./dist/index.d.ts",
   "main": "./dist/index.js",
