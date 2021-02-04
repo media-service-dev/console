@@ -1,7 +1,7 @@
 /*
  * This file is part of the @mscs/console package.
  *
- * Copyright (c) 2020 media-service consulting & solutions GmbH
+ * Copyright (c) 2021 media-service consulting & solutions GmbH
  *
  * For the full copyright and license information, please view the LICENSE
  * File that was distributed with this source code.
@@ -9,6 +9,7 @@
 
 import each from "jest-each";
 import * as os from "os";
+
 import { Application } from "../../src/Application/Application";
 import { Command } from "../../src/Command/Command";
 import { ArgumentException } from "../../src/Exception/ArgumentException";
@@ -142,6 +143,7 @@ describe("Command", () => {
 
             // Assert
             const definition = command.getDefinition();
+
             expect(definition.hasArgument("foo")).toBeTruthy();
         });
 
@@ -169,6 +171,7 @@ describe("Command", () => {
 
             // Assert
             const definition = command.getDefinition();
+
             expect(definition.hasOption("bar")).toBeTruthy();
         });
 
@@ -349,6 +352,7 @@ describe("Command", () => {
         it("should fallback to description", () => {
             // Arrange
             const command = new TestCommand();
+
             command.setHelp("");
 
             // Act
@@ -362,6 +366,7 @@ describe("Command", () => {
             // Arrange
             const command = new TestCommand();
             const application = new Application();
+
             command.setHelp("The %command.name% command does... Example: php %command.full_name%.");
             application.add(command);
             application.setDefaultCommand("namespace:name", true);
@@ -377,6 +382,7 @@ describe("Command", () => {
             // Arrange
             const command = new TestCommand();
             const application = new Application();
+
             command.setHelp("The %command.name% command does... Example: php %command.full_name%.");
             application.add(command);
             application.setDefaultCommand("namespace:name", true);
@@ -432,6 +438,7 @@ describe("Command", () => {
         it("should returns the synopsis", () => {
             // Arrange
             const command = new TestCommand();
+
             command.addOption("foo");
             command.addArgument("bar");
 
@@ -456,6 +463,7 @@ describe("Command", () => {
 
             // Assert
             const actual = command.getUsages();
+
             expect(actual).toContain("namespace:name foo1");
             expect(actual).toContain("namespace:name foo2");
         });
@@ -463,6 +471,7 @@ describe("Command", () => {
         it("should get usages", () => {
             // Arrange
             const command = new TestCommand();
+
             command.addUsage("foo1");
             command.addUsage("foo2");
 
@@ -482,6 +491,7 @@ describe("Command", () => {
             // Arrange
             const application = new Application();
             const command = new TestCommand();
+
             command.setApplication(application);
             const formatterHelper = new FormatterHelper();
 
@@ -526,6 +536,7 @@ describe("Command", () => {
 
             // Assert
             const actual = command.getDefinition();
+
             expect(actual.hasArgument("foo")).toBeTruthy();
             expect(actual.hasArgument("bar")).toBeTruthy();
             expect(actual.hasOption("foo")).toBeTruthy();
@@ -581,6 +592,7 @@ describe("Command", () => {
 
             // Assert
             const actual = tester.getDisplay();
+
             expect(actual).toBe("interact called" + os.EOL + "execute called" + os.EOL);
         });
 
@@ -594,6 +606,7 @@ describe("Command", () => {
 
             // Assert
             const actual = tester.getDisplay();
+
             expect(actual).toBe("execute called" + os.EOL);
         });
     });
@@ -630,10 +643,12 @@ describe("Command", () => {
             // Arrange
             const command = new TestCommand();
             const application = new Application();
+
             command.setApplication(application);
 
             // Act
             const actual = await command.run(new CollectionInput([]), new NullOutput());
+
             // const actual = async () => {
             //     return await command.run(new CollectionInput([]), new NullOutput())
             // };

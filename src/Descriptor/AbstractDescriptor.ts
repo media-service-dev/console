@@ -1,7 +1,7 @@
 /*
  * This file is part of the @mscs/console package.
  *
- * Copyright (c) 2020 media-service consulting & solutions GmbH
+ * Copyright (c) 2021 media-service consulting & solutions GmbH
  *
  * For the full copyright and license information, please view the LICENSE
  * File that was distributed with this source code.
@@ -20,7 +20,7 @@ import { DescriptorInterface } from "./DescriptorInterface";
 
 export abstract class AbstractDescriptor<Options> implements DescriptorInterface<Options> {
 
-    protected output: OutputInterface;
+    protected output!: OutputInterface;
 
     public describe(output: OutputInterface, target: ArgumentDefinition | OptionDefinition | InputDefinition | CommandInterface | ApplicationInterface, options: Options): void {
         this.output = output;
@@ -42,6 +42,7 @@ export abstract class AbstractDescriptor<Options> implements DescriptorInterface
              *        -> Application/Application.ts > Command/HelpCommand.ts > Helper/DescriptorHelper.ts > Descriptor/JsonDescriptor.ts > Descriptor/AbstractDescriptor.ts
              */
             const app = require("../Application/Application");
+
             if (target instanceof app.Application) {
                 this.describeApplication(target as ApplicationInterface, options);
             } else {

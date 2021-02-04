@@ -1,13 +1,14 @@
 /*
  * This file is part of the @mscs/console package.
  *
- * Copyright (c) 2020 media-service consulting & solutions GmbH
+ * Copyright (c) 2021 media-service consulting & solutions GmbH
  *
  * For the full copyright and license information, please view the LICENSE
  * File that was distributed with this source code.
  */
 
 import * as semver from "semver";
+
 import { CommandInterface } from "../Command/CommandInterface";
 import { HelperSet } from "../Helper/HelperSet";
 import { InputArguments } from "../Input/InputArguments";

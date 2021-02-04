@@ -1,13 +1,14 @@
 /*
  * This file is part of the @mscs/console package.
  *
- * Copyright (c) 2020 media-service consulting & solutions GmbH
+ * Copyright (c) 2021 media-service consulting & solutions GmbH
  *
  * For the full copyright and license information, please view the LICENSE
  * File that was distributed with this source code.
  */
 
 import * as os from "os";
+
 import { Application } from "../../src/Application/Application";
 import { HelpCommand } from "../../src/Command/HelpCommand";
 import { ArgumentException } from "../../src/Exception/ArgumentException";
@@ -159,6 +160,7 @@ describe("Application", () => {
         it("should take a namespace as its first argument", () => {
             // Arrange
             const application = new Application();
+
             application.add(new FooCommand());
 
             // Act
@@ -186,6 +188,7 @@ describe("Application", () => {
         it("should register ambiguous", async () => {
             // Arrange
             const application = new Application();
+
             application.setAutoExit(false);
             const tester = new ApplicationTester(application);
 
@@ -240,6 +243,7 @@ describe("Application", () => {
 
             // Assert
             const commands = application.all();
+
             expect(commands.get("foo:bar")).toBe(foo);
             expect(commands.get("foo:bar1")).toBe(foo1);
         });
@@ -288,6 +292,7 @@ describe("Application", () => {
             // Arrange
             const application = new Application();
             const command = new FooCommand();
+
             application.add(command);
 
             // Act
@@ -301,6 +306,7 @@ describe("Application", () => {
             // Arrange
             const application = new Application();
             const command = new FooCommand();
+
             application.add(command);
 
             // Act
@@ -314,6 +320,7 @@ describe("Application", () => {
             // Arrange
             const application = new Application();
             const command = new FooCommand();
+
             application.add(command);
 
             // Act
@@ -327,6 +334,7 @@ describe("Application", () => {
             // Arrange
             const application = new Application();
             const command = new FooCommand();
+
             application.add(command);
             // Simulate --help
             (application as any).wantHelps = true;
@@ -343,6 +351,7 @@ describe("Application", () => {
     it("should display nothing on silent help", async () => {
         // Arrange
         const application = new Application();
+
         application.setAutoExit(false);
         application.setCatchExceptions(false);
         const tester = new ApplicationTester(application);
@@ -370,6 +379,7 @@ describe("Application", () => {
     it("should return an array fo unique used namespaces", () => {
         // Arrange
         const application = new Application();
+
         application.add(new FooCommand());
         application.add(new Foo1Command());
 
@@ -385,6 +395,7 @@ describe("Application", () => {
         it("should returns the given namespace if it exists", () => {
             // Arrange
             const application = new Application();
+
             application.add(new FooCommand());
 
             // Act
@@ -397,6 +408,7 @@ describe("Application", () => {
         it("should finds a namespace given an abbreviation", () => {
             // Arrange
             const application = new Application();
+
             application.add(new FooCommand());
 
             // Act
@@ -409,6 +421,7 @@ describe("Application", () => {
         it("should returns the given namespace if it exists", () => {
             // Arrange
             const application = new Application();
+
             application.add(new FooCommand());
             application.add(new Foo2Command());
 
@@ -422,6 +435,7 @@ describe("Application", () => {
         it("should returns commands even if the commands are only contained in subnamespaces", () => {
             // Arrange
             const application = new Application();
+
             application.add(new FooSubnamespaced1Command());
             application.add(new FooSubnamespaced2Command());
 
@@ -435,6 +449,7 @@ describe("Application", () => {
         it("should throw if namespace is ambiguous", () => {
             // Arrange
             const application = new Application();
+
             application.add(new BarBazCommand());
             application.add(new FooCommand());
             application.add(new Foo2Command());
@@ -468,6 +483,7 @@ describe("Application", () => {
         it("should find non ambiguous", () => {
             // Arrange
             const application = new Application();
+
             application.add(new TestAmbiguousCommandRegistering());
             application.add(new TestAmbiguousCommandRegistering2());
 
@@ -481,6 +497,7 @@ describe("Application", () => {
         it("should throw if command is not defined", () => {
             // Arrange
             const application = new Application();
+
             application.add(new FooCommand());
             application.add(new Foo1Command());
             application.add(new Foo2Command());
@@ -497,6 +514,7 @@ describe("Application", () => {
         it("should returns a command if its name exists", () => {
             // Arrange
             const application = new Application();
+
             application.add(new FooCommand());
 
             // Act
@@ -509,6 +527,7 @@ describe("Application", () => {
         it("should returns the good command even if a namespace has same name", () => {
             // Arrange
             const application = new Application();
+
             application.add(new Foo3Command());
             application.add(new Foo4Command());
 
@@ -522,6 +541,7 @@ describe("Application", () => {
         it("should returns a command even if its namespace equals another command name", () => {
             // Arrange
             const application = new Application();
+
             application.add(new Foo3Command());
             application.add(new Foo4Command());
 
@@ -539,6 +559,7 @@ describe("Application", () => {
         it("should catch exceptions and render them", async () => {
             // Arrange
             const application = new Application();
+
             application.setAutoExit(false);
             const tester = new ApplicationTester(application);
 
@@ -558,6 +579,7 @@ describe("Application", () => {
         it("should throw if catch exception is disabled", async () => {
             // Arrange
             const application = new Application();
+
             application.setAutoExit(false);
             const tester = new ApplicationTester(application);
 
@@ -594,6 +616,7 @@ describe("Application", () => {
         it("should get auto exit", () => {
             // Arrange
             const application = new Application();
+
             application.setAutoExit(false);
 
             // Act
@@ -611,6 +634,7 @@ describe("Application", () => {
             // Arrange
             const application = new Application();
             const command = new Foo1Command();
+
             application.setAutoExit(false);
             application.setCatchExceptions(false);
             application.add(command);
@@ -628,6 +652,7 @@ describe("Application", () => {
         it("should runs the list command if no argument is passed", async () => {
             // Arrange
             const application = new Application();
+
             application.setAutoExit(false);
             application.setCatchExceptions(false);
             ensureStaticCommandHelp(application);
@@ -643,6 +668,7 @@ describe("Application", () => {
         it("should runs the help command if --help is passed", async () => {
             // Arrange
             const application = new Application();
+
             application.setAutoExit(false);
             application.setCatchExceptions(false);
             ensureStaticCommandHelp(application);
@@ -658,6 +684,7 @@ describe("Application", () => {
         it("should runs the help command if -h is passed", async () => {
             // Arrange
             const application = new Application();
+
             application.setAutoExit(false);
             application.setCatchExceptions(false);
             ensureStaticCommandHelp(application);
@@ -673,6 +700,7 @@ describe("Application", () => {
         it("should displays the help if --help is passed", async () => {
             // Arrange
             const application = new Application();
+
             application.setAutoExit(false);
             application.setCatchExceptions(false);
             ensureStaticCommandHelp(application);
@@ -688,6 +716,7 @@ describe("Application", () => {
         it("should displays the help if -h is passed", async () => {
             // Arrange
             const application = new Application();
+
             application.setAutoExit(false);
             application.setCatchExceptions(false);
             ensureStaticCommandHelp(application);
@@ -703,6 +732,7 @@ describe("Application", () => {
         it("should forces color output if --ansi is passed", async () => {
             // Arrange
             const application = new Application();
+
             application.setAutoExit(false);
             application.setCatchExceptions(false);
             ensureStaticCommandHelp(application);
@@ -718,6 +748,7 @@ describe("Application", () => {
         it("should forces color output to be disabled if --no-ansi is passed", async () => {
             // Arrange
             const application = new Application();
+
             application.setAutoExit(false);
             application.setCatchExceptions(false);
             ensureStaticCommandHelp(application);
@@ -733,6 +764,7 @@ describe("Application", () => {
         it("should displays the program version if --version is passed", async () => {
             // Arrange
             const application = new Application();
+
             application.setAutoExit(false);
             application.setCatchExceptions(false);
             ensureStaticCommandHelp(application);
@@ -748,6 +780,7 @@ describe("Application", () => {
         it("should displays the program version if -V is passed", async () => {
             // Arrange
             const application = new Application();
+
             application.setAutoExit(false);
             application.setCatchExceptions(false);
             ensureStaticCommandHelp(application);
@@ -763,6 +796,7 @@ describe("Application", () => {
         it("should removes all output and off the interactive if --quiet is passed", async () => {
             // Arrange
             const application = new Application();
+
             application.setAutoExit(false);
             application.setCatchExceptions(false);
             ensureStaticCommandHelp(application);
@@ -779,6 +813,7 @@ describe("Application", () => {
         it("should removes all output and off the interactive if -q is passed", async () => {
             // Arrange
             const application = new Application();
+
             application.setAutoExit(false);
             application.setCatchExceptions(false);
             ensureStaticCommandHelp(application);
@@ -795,6 +830,7 @@ describe("Application", () => {
         it("should sets the output to verbose if --verbose is passed", async () => {
             // Arrange
             const application = new Application();
+
             application.setAutoExit(false);
             application.setCatchExceptions(false);
             ensureStaticCommandHelp(application);
@@ -810,6 +846,7 @@ describe("Application", () => {
         it("should sets the output to verbose if --verbose=1 is passed", async () => {
             // Arrange
             const application = new Application();
+
             application.setAutoExit(false);
             application.setCatchExceptions(false);
             ensureStaticCommandHelp(application);
@@ -825,6 +862,7 @@ describe("Application", () => {
         it("should sets the output to very verbose if --verbose=2 is passed", async () => {
             // Arrange
             const application = new Application();
+
             application.setAutoExit(false);
             application.setCatchExceptions(false);
             ensureStaticCommandHelp(application);
@@ -840,6 +878,7 @@ describe("Application", () => {
         it("should sets the output to very verbose if --verbose=3 is passed", async () => {
             // Arrange
             const application = new Application();
+
             application.setAutoExit(false);
             application.setCatchExceptions(false);
             ensureStaticCommandHelp(application);
@@ -855,6 +894,7 @@ describe("Application", () => {
         it("should sets the output to verbose if unknown --verbose level is passed", async () => {
             // Arrange
             const application = new Application();
+
             application.setAutoExit(false);
             application.setCatchExceptions(false);
             ensureStaticCommandHelp(application);
@@ -870,6 +910,7 @@ describe("Application", () => {
         it("should sets the output to verbose if -v is passed", async () => {
             // Arrange
             const application = new Application();
+
             application.setAutoExit(false);
             application.setCatchExceptions(false);
             ensureStaticCommandHelp(application);
@@ -885,6 +926,7 @@ describe("Application", () => {
         it("should sets the output to verbose if -vv is passed", async () => {
             // Arrange
             const application = new Application();
+
             application.setAutoExit(false);
             application.setCatchExceptions(false);
             ensureStaticCommandHelp(application);
@@ -900,6 +942,7 @@ describe("Application", () => {
         it("should sets the output to verbose if -vvv is passed", async () => {
             // Arrange
             const application = new Application();
+
             application.setAutoExit(false);
             application.setCatchExceptions(false);
             ensureStaticCommandHelp(application);
@@ -915,6 +958,7 @@ describe("Application", () => {
         it("should not call interact() if --no-interaction is passed", async () => {
             // Arrange
             const application = new Application();
+
             application.setAutoExit(false);
             application.setCatchExceptions(false);
             application.add(new FooCommand());
@@ -930,6 +974,7 @@ describe("Application", () => {
         it("should not call interact() if -n is passed", async () => {
             // Arrange
             const application = new Application();
+
             application.setAutoExit(false);
             application.setCatchExceptions(false);
             application.add(new FooCommand());

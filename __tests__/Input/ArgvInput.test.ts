@@ -1,13 +1,14 @@
 /*
  * This file is part of the @mscs/console package.
  *
- * Copyright (c) 2020 media-service consulting & solutions GmbH
+ * Copyright (c) 2021 media-service consulting & solutions GmbH
  *
  * For the full copyright and license information, please view the LICENSE
  * File that was distributed with this source code.
  */
 
 import each from "jest-each";
+
 import { ArgumentDefinition } from "../../src/Input/ArgumentDefinition";
 import { ArgumentMode } from "../../src/Input/ArgumentMode";
 import { ArgvInput } from "../../src/Input/ArgvInput";
@@ -21,6 +22,7 @@ describe("ArgvInput tests", () => {
     it("should correct work with constructor", () => {
         process.argv = ["node", "file.js", "foo"];
         const input = new ArgvInput();
+
         expect((input as any).tokens).toEqual(["foo"]);
     });
 
@@ -30,6 +32,7 @@ describe("ArgvInput tests", () => {
         // parsed required arguments
         input.bind(new InputDefinition([new ArgumentDefinition("name")]));
         let args = Array.from(input.getArguments().entries());
+
         expect(args).toEqual([["name", "foo"]]);
 
         // parse is Stateless
@@ -159,9 +162,11 @@ describe("ArgvInput tests", () => {
     ])
         .it("should parses options - data set #%#", (argv, definitions, expected) => {
             const input = new ArgvInput(argv);
+
             input.bind(new InputDefinition(definitions));
 
             const options = Array.from(input.getOptions().entries());
+
             expect(options).toEqual(expected);
         });
 
@@ -226,20 +231,24 @@ describe("ArgvInput tests", () => {
         .it("should fail parse input - data set #%#", (argv, definitions, message) => {
             expect(() => {
                 const input = new ArgvInput(argv);
+
                 input.bind(new InputDefinition(definitions));
             }).toThrowError(message);
         });
 
     it("should parse array argument", () => {
         const input = new ArgvInput(["node", "file.js", "foo", "bar", "baz", "bat"]);
+
         input.bind(new InputDefinition([new ArgumentDefinition("name", ArgumentMode.IS_ARRAY)]));
 
         const args = Array.from(input.getArguments().entries());
+
         expect(args).toEqual([["name", ["foo", "bar", "baz", "bat"]]]);
     });
 
     it("should parse array option", () => {
         let input = new ArgvInput(["node", "file.js", "--name=foo", "--name=bar", "--name=baz"]);
+
         input.bind(new InputDefinition([new OptionDefinition("name", null, OptionMode.VALUE_OPTIONAL | OptionMode.VALUE_IS_ARRAY)]));
         expect(Array.from(input.getOptions().entries())).toEqual([["name", ["foo", "bar", "baz"]]]);
 
@@ -264,6 +273,7 @@ describe("ArgvInput tests", () => {
 
     it("should parse negative number after double dash", () => {
         let input = new ArgvInput(["node", "file.js", "--", "-1"]);
+
         input.bind(new InputDefinition([new ArgumentDefinition("number")]));
         expect(Array.from(input.getArguments().entries())).toEqual([["number", "-1"]]);
 
@@ -278,6 +288,7 @@ describe("ArgvInput tests", () => {
 
     it("should parse empty string argument", () => {
         const input = new ArgvInput(["node", "file.js", "-f", "bar", ""]);
+
         input.bind(new InputDefinition([
             new ArgumentDefinition("empty"),
             new OptionDefinition("foo", "f", OptionMode.VALUE_OPTIONAL),
@@ -287,6 +298,7 @@ describe("ArgvInput tests", () => {
 
     it("should get first argument", () => {
         let input = new ArgvInput(["node", "file.js", "-fbbar"]);
+
         expect(input.getFirstArgument()).toBeNull();
 
         input = new ArgvInput(["node", "file.js", "-fbbar", "foo"]);
@@ -310,6 +322,7 @@ describe("ArgvInput tests", () => {
 
     it("should has parameter option", () => {
         let input = new ArgvInput(["node", "file.js", "-f", "foo"]);
+
         expect(input.hasParameterOption("-f")).toBeTruthy();
 
         input = new ArgvInput(["node", "file.js", "-etest"]);
@@ -328,6 +341,7 @@ describe("ArgvInput tests", () => {
 
     it("should has parameter option, only options", () => {
         let input = new ArgvInput(["node", "file.js", "-f", "foo"]);
+
         expect(input.hasParameterOption("-f", true)).toBeTruthy();
 
         input = new ArgvInput(["node", "file.js", "--foo", "--", "foo"]);
@@ -384,6 +398,7 @@ describe("ArgvInput tests", () => {
 
     it("should convert corrent to string", () => {
         let input = new ArgvInput(["node", "file.js", "-f", "foo"]);
+
         expect(input.toString()).toBe("-f foo");
 
         input = new ArgvInput(["node", "file.js", "-f", "--bar=foo", "a b c d", "A\nB'C"]);
@@ -406,17 +421,20 @@ describe("ArgvInput tests", () => {
         // eslint-disable-next-line max-params
         .it("should get parameter option quel sign", (argv, key, defaultValue, onlyParams, expected) => {
             const input = new ArgvInput(argv);
+
             expect(input.getParameterOption(key, defaultValue, onlyParams)).toBe(expected);
         });
 
     it("should parse single dash as argument", () => {
         const input = new ArgvInput(["node", "file.js", "-"]);
+
         input.bind(new InputDefinition([new ArgumentDefinition("file")]));
         expect(Array.from(input.getArguments())).toEqual([["file", "-"]]);
     });
 
     it("should parse option with value optional given empty and required argument", () => {
         let input = new ArgvInput(["node", "file.js", "--foo=", "bar"]);
+
         input.bind(new InputDefinition([
             new OptionDefinition("foo", "f", OptionMode.VALUE_OPTIONAL),
             new ArgumentDefinition("name", ArgumentMode.REQUIRED),
@@ -435,6 +453,7 @@ describe("ArgvInput tests", () => {
 
     it("should parse option with value optional given empty and optional argument", () => {
         let input = new ArgvInput(["node", "file.js", "--foo=", "bar"]);
+
         input.bind(new InputDefinition([
             new OptionDefinition("foo", "f", OptionMode.VALUE_OPTIONAL),
             new ArgumentDefinition("name", ArgumentMode.OPTIONAL),

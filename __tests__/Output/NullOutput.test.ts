@@ -1,7 +1,7 @@
 /*
  * This file is part of the @mscs/console package.
  *
- * Copyright (c) 2020 media-service consulting & solutions GmbH
+ * Copyright (c) 2021 media-service consulting & solutions GmbH
  *
  * For the full copyright and license information, please view the LICENSE
  * File that was distributed with this source code.
@@ -30,6 +30,7 @@ describe("NullOutput", () => {
         it("should always returns VERBOSITY_QUIET for NullOutput", () => {
             // Arrange
             const output: OutputInterface = new NullOutput();
+
             output.setVerbosity(OutputMode.VERBOSITY_NORMAL);
 
             // Act
@@ -55,6 +56,7 @@ describe("NullOutput", () => {
         it("should always return NullFormatterOutput", () => {
             // Arrange
             const output: OutputInterface = new NullOutput();
+
             output.setFormatter(new OutputFormatter());
 
             // Act
@@ -80,6 +82,7 @@ describe("NullOutput", () => {
         it("should return always false", () => {
             // Arrange
             const output: OutputInterface = new NullOutput();
+
             output.setDecorated(true);
 
             // Act
@@ -106,6 +109,7 @@ describe("NullOutput", () => {
         it("should return always false", () => {
             // Arrange
             const output: OutputInterface = new NullOutput();
+
             output.setVerbosity(OutputMode.VERBOSITY_VERBOSE);
 
             // Act
@@ -133,6 +137,7 @@ describe("NullOutput", () => {
         it("should return always false", () => {
             // Arrange
             const output: OutputInterface = new NullOutput();
+
             output.setVerbosity(OutputMode.VERBOSITY_VERY_VERBOSE);
 
             // Act
@@ -160,6 +165,7 @@ describe("NullOutput", () => {
         it("should return always false", () => {
             // Arrange
             const output: OutputInterface = new NullOutput();
+
             output.setVerbosity(OutputMode.VERBOSITY_DEBUG);
 
             // Act

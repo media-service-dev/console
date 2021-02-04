@@ -1,13 +1,14 @@
 /*
  * This file is part of the @mscs/console package.
  *
- * Copyright (c) 2020 media-service consulting & solutions GmbH
+ * Copyright (c) 2021 media-service consulting & solutions GmbH
  *
  * For the full copyright and license information, please view the LICENSE
  * File that was distributed with this source code.
  */
 
 import each from "jest-each";
+
 import { OutputFormatter } from "../../src/Formatter/OutputFormatter";
 import { OutputFormatterStyle } from "../../src/Formatter/OutputFormatterStyle";
 import { OutputMode } from "../../src/Output/OutputMode";
@@ -178,6 +179,7 @@ describe("AbstractOutput", () => {
     it("should write without decoration", () => {
         // Arrange
         const output = new MockedOutput();
+
         output.setDecorated(false);
 
         // Act
@@ -192,6 +194,7 @@ describe("AbstractOutput", () => {
         // Arrange
         const style = new OutputFormatterStyle("yellow", "red", ["blink"]);
         const output = new MockedOutput();
+
         output.getFormatter().setStyle("FOO", style);
         output.setDecorated(true);
 
@@ -231,6 +234,7 @@ describe("AbstractOutput", () => {
         .it("should write with verbosity option", (verbosity, expected) => {
             // Arrange
             const output = new MockedOutput();
+
             output.setVerbosity(verbosity);
             output.clear();
 

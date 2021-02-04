@@ -1,7 +1,7 @@
 /*
  * This file is part of the @mscs/console package.
  *
- * Copyright (c) 2020 media-service consulting & solutions GmbH
+ * Copyright (c) 2021 media-service consulting & solutions GmbH
  *
  * For the full copyright and license information, please view the LICENSE
  * File that was distributed with this source code.
@@ -13,9 +13,9 @@ import { OutputInterface } from "../../../src/Output/OutputInterface";
 
 export class Foo1Command extends Command {
 
-    public output: OutputInterface;
+    public output!: OutputInterface;
 
-    public input: InputInterface;
+    public input!: InputInterface;
 
     protected configure(): void {
         this.setName("foo:bar1")

@@ -1,7 +1,7 @@
 /*
  * This file is part of the @mscs/console package.
  *
- * Copyright (c) 2020 media-service consulting & solutions GmbH
+ * Copyright (c) 2021 media-service consulting & solutions GmbH
  *
  * For the full copyright and license information, please view the LICENSE
  * File that was distributed with this source code.
@@ -9,6 +9,7 @@
 
 import * as os from "os";
 import * as util from "util";
+
 import { OutputFormatter } from "../Formatter/OutputFormatter";
 import { AbstractHelper } from "../Helper/AbstractHelper";
 import { QuestionHelper } from "../Helper/QuestionHelper";
@@ -31,13 +32,14 @@ export class StyledOutput extends AbstractStyledOutput {
 
     private bufferedOutput: BufferedOutput;
 
-    private questionHelper: QuestionHelper;
+    private questionHelper!: QuestionHelper;
 
     public constructor(input: InputInterface, output: OutputInterface) {
         super(output);
         this.input = input;
         this.bufferedOutput = new BufferedOutput();
         const width = (new Terminal()).getWidth();
+
         this.lineLength = Math.min(width, 120);
     }
 
@@ -109,14 +111,18 @@ export class StyledOutput extends AbstractStyledOutput {
 
     public async ask<Type>(question: string, defaultValue: Type | null = null, validator: ((response: (Type | null)) => Type) | null = null): Promise<Type> {
         const questionObject = new Question<Type>(question, defaultValue);
+
         questionObject.setValidator(validator);
+
         return this.askQuestion(questionObject);
     }
 
     public async askHidden<Type>(question: string, validator: ((response: (Type | null)) => Type) | null = null): Promise<Type> {
         const questionObject = new Question<Type>(question);
+
         questionObject.setHidden(true);
         questionObject.setValidator(validator);
+
         return this.askQuestion(questionObject);
     }
 
@@ -126,6 +132,7 @@ export class StyledOutput extends AbstractStyledOutput {
 
     public async choice(question: string, choices: string[], defaultValue: string | null = null): Promise<string> {
         const questionObject = new ChoiceQuestion(question, choices, defaultValue);
+
         return (await this.askQuestion(questionObject)) as string;
     }
 
@@ -163,6 +170,7 @@ export class StyledOutput extends AbstractStyledOutput {
 
         if (!this.questionHelper) {
             const module = require("../Helper/StyleQuestionHelper");
+
             this.questionHelper = new module.StyleQuestionHelper();
         }
 
@@ -178,8 +186,10 @@ export class StyledOutput extends AbstractStyledOutput {
 
     private autoPrependBlock() {
         const characters = this.bufferedOutput.fetch().replace(os.EOL, "\n").substr(-2);
+
         if (characters.length === 0) {
             this.newLine();
+
             return;
         }
 
@@ -217,11 +227,13 @@ export class StyledOutput extends AbstractStyledOutput {
         // wrap and add newlines for each element
         for (let index = 0; index < messages.length; index++) {
             let message = messages[index];
+
             if (escape) {
                 message = OutputFormatter.escapeBackslashes(message);
             }
 
             const wrapped = TextUtilities.wrap(message, this.lineLength - prefixLength - indentLength, os.EOL, true);
+
             lines.push(...wrapped.split(os.EOL));
 
             if (messages.length > 1 && index < messages.length - 1) {
@@ -230,6 +242,7 @@ export class StyledOutput extends AbstractStyledOutput {
         }
 
         let firstLineIndex = 0;
+
         if (padding && this.isDecorated()) {
             firstLineIndex = 1;
             lines.unshift("");
