@@ -1,7 +1,7 @@
 /*
  * This file is part of the @mscs/console package.
  *
- * Copyright (c) 2020 media-service consulting & solutions GmbH
+ * Copyright (c) 2021 media-service consulting & solutions GmbH
  *
  * For the full copyright and license information, please view the LICENSE
  * File that was distributed with this source code.
@@ -105,6 +105,7 @@ export class OutputFormatterStyle implements OutputFormatterStyleInterface {
     public setBackground(color: keyof ColorMapping | null = null): void {
         if (null === color) {
             this.background = null;
+
             return;
         }
 
@@ -118,6 +119,7 @@ export class OutputFormatterStyle implements OutputFormatterStyleInterface {
     public setForeground(color: keyof ColorMapping | null = null): void {
         if (null === color) {
             this.foreground = null;
+
             return;
         }
 
@@ -152,6 +154,7 @@ export class OutputFormatterStyle implements OutputFormatterStyleInterface {
         }
 
         const index = this.options.indexOf(OutputFormatterStyle.availableOptions[option]);
+
         if (index !== -1) {
             this.options.splice(index, 1);
         }

@@ -1,7 +1,7 @@
 /*
  * This file is part of the @mscs/console package.
  *
- * Copyright (c) 2020 media-service consulting & solutions GmbH
+ * Copyright (c) 2021 media-service consulting & solutions GmbH
  *
  * For the full copyright and license information, please view the LICENSE
  * File that was distributed with this source code.
@@ -9,6 +9,7 @@
 
 import * as readline from "readline";
 import { Readable } from "stream";
+
 import { RuntimeException } from "../Exception/RuntimeException";
 import { InputInterface } from "../Input/InputInterface";
 import { StreamableInputInterface } from "../Input/StreamableInputInterface";
@@ -25,9 +26,9 @@ import { FormatterHelper } from "./FormatterHelper";
 
 export class QuestionHelper extends AbstractHelper {
 
-    private inputStream: Readable;
+    private inputStream!: Readable;
 
-    public async ask<Type>(input: InputInterface, output: OutputInterface, question: ChoiceQuestion): Promise<string | string[]>;
+    public async ask(input: InputInterface, output: OutputInterface, question: ChoiceQuestion): Promise<string | string[]>;
 
     public async ask<Type>(input: InputInterface, output: OutputInterface, question: Question<Type>): Promise<Type>;
 
@@ -91,6 +92,7 @@ export class QuestionHelper extends AbstractHelper {
 
         if (this.isStreamable(input)) {
             const stream = input.getStream() ?? null;
+
             if (stream) {
                 if (stream instanceof LineByLineStream) {
                     this.inputStream = stream;
@@ -132,6 +134,7 @@ export class QuestionHelper extends AbstractHelper {
 
         const maxWidth = Math.max(...keys.concat(values).map((item) => item.length));
         const items: string[] = [];
+
         for (const [key, value] of choices.entries()) {
             if (question.isSimple()) {
                 items.push(`  [<${style}>${value}${" ".repeat(maxWidth - value.length)}</${style}>] ${value}`);
@@ -145,8 +148,10 @@ export class QuestionHelper extends AbstractHelper {
 
     protected writeError(output: OutputInterface, error: Error) {
         const helperSet = this.getHelperSet();
+
         if (helperSet && helperSet.has("formatter")) {
             const formatter = helperSet.get<FormatterHelper>("formatter");
+
             output.writeln(formatter.formatBlock(error.message, "error"));
         } else {
             output.writeln(`<error>${error.message}</error>`);
@@ -163,11 +168,14 @@ export class QuestionHelper extends AbstractHelper {
 
     private async doAsk<Type>(output: OutputInterface, question: Question<Type>): Promise<Type | null> {
         const stream = this.inputStream ?? process.stdin;
+
         this.writePrompt(question, output);
 
         let outputStream;
+
         if (output instanceof StyledOutput) {
             const realOutput = output.getOutput();
+
             if (realOutput instanceof StreamOutput) {
                 outputStream = realOutput.getStream();
             }
@@ -210,6 +218,7 @@ export class QuestionHelper extends AbstractHelper {
         let value: string = await (
             new Promise<string>((resolve, reject) => {
                 let resolved: boolean = false;
+
                 read.on("line", (input: string) => {
                     resolved = true;
                     resolve(input);
@@ -238,6 +247,7 @@ export class QuestionHelper extends AbstractHelper {
         value = value.length > 0 ? value : question.getDefault() as any;
 
         const normalizer = question.getNormalizer();
+
         if (normalizer) {
             return normalizer(value);
         }
@@ -257,6 +267,7 @@ export class QuestionHelper extends AbstractHelper {
 
             try {
                 const value = await interviewer();
+
                 if (validator) {
                     return validator(value);
                 }

@@ -1,13 +1,14 @@
 /*
  * This file is part of the @mscs/console package.
  *
- * Copyright (c) 2020 media-service consulting & solutions GmbH
+ * Copyright (c) 2021 media-service consulting & solutions GmbH
  *
  * For the full copyright and license information, please view the LICENSE
  * File that was distributed with this source code.
  */
 
 import each from "jest-each";
+
 import { NumberUtilities } from "../../src/Utilities/NumberUtilities";
 
 describe("NumberUtilities tests", () => {
@@ -25,6 +26,7 @@ describe("NumberUtilities tests", () => {
         ["123_456", NaN],
     ]).it("should parse int strict", (input, expected) => {
         const result = NumberUtilities.parseIntStrict(input);
+
         expect(result).toBe(expected);
     });
 
@@ -41,6 +43,7 @@ describe("NumberUtilities tests", () => {
         ["123_456", false],
     ]).it("should check int strict", (input, expected) => {
         const result = NumberUtilities.isIntStrict(input);
+
         expect(result).toBe(expected);
     });
 

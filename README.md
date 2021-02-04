@@ -32,13 +32,14 @@ async function runtime() {
     await application.run();
 }
 
-runtime().catch(error => {
-    console.log(error);
-    process.exit(1);
-});
+runtime()
+    .catch(error => {
+        console.log(error);
+        process.exit(1);
+    });
 ```
 
-# Important note 
+# Important note
 
 Since *Symfony* is, for good reason, a registered trademark, please take note that we are in no way associated with [the Symfony brand](https://symfony.com/) or the [SensioLabs](https://sensiolabs.com/) organization.
 Therefore, we don't represent or speak for any of them.

@@ -1,13 +1,14 @@
 /*
  * This file is part of the @mscs/console package.
  *
- * Copyright (c) 2020 media-service consulting & solutions GmbH
+ * Copyright (c) 2021 media-service consulting & solutions GmbH
  *
  * For the full copyright and license information, please view the LICENSE
  * File that was distributed with this source code.
  */
 
 import * as Stream from "stream";
+
 import { HybridCollection } from "../Collection/HybridCollection";
 import { HybridCollectionEntriesType } from "../Collection/HybridCollectionEntriesType";
 import { HybridCollectionKeyType } from "../Collection/HybridCollectionKeyType";
@@ -27,11 +28,11 @@ export abstract class AbstractInput<Arguments extends InputArguments = {}, Optio
 
     protected arguments: HybridCollection<ArgumentValue>;
 
-    protected definition: InputDefinition;
+    protected definition!: InputDefinition;
 
     protected interactive: boolean = true;
 
-    private stream: Stream.Readable;
+    private stream!: Stream.Readable;
 
     public constructor() {
         this.options = new HybridCollection();
@@ -57,7 +58,7 @@ export abstract class AbstractInput<Arguments extends InputArguments = {}, Optio
 
     public getArgument<ArgumentKeys extends keyof Arguments>(key: ArgumentKeys): Arguments[ArgumentKeys];
 
-    public getArgument<ArgumentKeys extends keyof Arguments>(key: HybridCollectionKeyType): ArgumentValue;
+    public getArgument(key: HybridCollectionKeyType): ArgumentValue;
 
     public getArgument<ArgumentKeys extends keyof Arguments>(key: HybridCollectionKeyType | ArgumentKeys): Arguments[ArgumentKeys] | ArgumentValue;
 
@@ -75,7 +76,7 @@ export abstract class AbstractInput<Arguments extends InputArguments = {}, Optio
 
     public getOption<OptionKeys extends keyof Options>(key: OptionKeys): Options[OptionKeys];
 
-    public getOption<OptionKeys extends keyof Options>(key: HybridCollectionKeyType): OptionValue;
+    public getOption(key: HybridCollectionKeyType): OptionValue;
 
     public getOption<OptionKeys extends keyof Options>(key: HybridCollectionKeyType | OptionKeys): Options[OptionKeys] | OptionValue;
 
@@ -93,7 +94,7 @@ export abstract class AbstractInput<Arguments extends InputArguments = {}, Optio
 
     public setArgument<ArgumentKeys extends keyof Arguments>(key: ArgumentKeys, value: Arguments[ArgumentKeys]): this;
 
-    public setArgument<ArgumentKeys extends keyof Arguments>(key: HybridCollectionKeyType, value: ArgumentValue): this;
+    public setArgument(key: HybridCollectionKeyType, value: ArgumentValue): this;
 
     public setArgument<ArgumentKeys extends keyof Arguments>(key: HybridCollectionKeyType | ArgumentKeys, value: Arguments[ArgumentKeys] | ArgumentValue): this;
 
@@ -102,12 +103,13 @@ export abstract class AbstractInput<Arguments extends InputArguments = {}, Optio
             throw new ArgumentException(`The "${key}" argument does not exist.`);
         }
         this.arguments.set(key, value);
+
         return this;
     }
 
     public setOption<OptionKeys extends keyof Options>(key: OptionKeys, value: Options[OptionKeys]): this;
 
-    public setOption<OptionKeys extends keyof Options>(key: HybridCollectionKeyType, value: OptionValue): this;
+    public setOption(key: HybridCollectionKeyType, value: OptionValue): this;
 
     public setOption<OptionKeys extends keyof Options>(key: HybridCollectionKeyType | OptionKeys, value: Options[OptionKeys] | OptionValue): this;
 
@@ -117,6 +119,7 @@ export abstract class AbstractInput<Arguments extends InputArguments = {}, Optio
         }
 
         this.options.set(key, value);
+
         return this;
     }
 
@@ -130,11 +133,13 @@ export abstract class AbstractInput<Arguments extends InputArguments = {}, Optio
 
     public setArguments<ArgumentKeys extends keyof Arguments>(args: HybridCollectionEntriesType<Arguments[ArgumentKeys] | ArgumentValue>): this {
         this.arguments = new HybridCollection<ArgumentValue>(args);
+
         return this;
     }
 
     public setOptions<OptionKeys extends keyof Options>(options: HybridCollectionEntriesType<Options[OptionKeys] | ArgumentValue>): this {
         this.options = new HybridCollection<OptionValue>(options);
+
         return this;
     }
 
@@ -154,6 +159,7 @@ export abstract class AbstractInput<Arguments extends InputArguments = {}, Optio
             .map(item => item.toString())
             .filter(name => {
                 const argument = definition.getArgument(name);
+
                 return !givenArguments.has(name) && argument.isRequired();
             });
 

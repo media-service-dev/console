@@ -1,7 +1,7 @@
 /*
  * This file is part of the @mscs/console package.
  *
- * Copyright (c) 2020 media-service consulting & solutions GmbH
+ * Copyright (c) 2021 media-service consulting & solutions GmbH
  *
  * For the full copyright and license information, please view the LICENSE
  * File that was distributed with this source code.
@@ -19,6 +19,7 @@ describe("OutputFormatterStyle", () => {
         const styleThree = new OutputFormatterStyle("green", "red");
 
         const stack = new OutputFormatterStyleStack();
+
         stack.push(styleOne);
         stack.push(styleTwo);
         expect(stack.peek()).toBe(styleTwo);
@@ -31,6 +32,7 @@ describe("OutputFormatterStyle", () => {
         const styleTwo = new OutputFormatterStyle("yellow", "blue");
 
         const stack = new OutputFormatterStyleStack();
+
         stack.push(styleOne);
         stack.push(styleTwo);
 
@@ -78,6 +80,7 @@ describe("OutputFormatterStyle", () => {
     it("should throw when trying to pop a style that is not on the stack", () => {
         expect(() => {
             const stack = new OutputFormatterStyleStack();
+
             stack.push(new OutputFormatterStyle("green", "red"));
             stack.popUntil(new OutputFormatterStyle("yellow", "black"));
         }).toThrow(RuntimeException);

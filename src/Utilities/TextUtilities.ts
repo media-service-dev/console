@@ -1,7 +1,7 @@
 /*
  * This file is part of the @mscs/console package.
  *
- * Copyright (c) 2020 media-service consulting & solutions GmbH
+ * Copyright (c) 2021 media-service consulting & solutions GmbH
  *
  * For the full copyright and license information, please view the LICENSE
  * File that was distributed with this source code.
@@ -27,6 +27,7 @@ export class TextUtilities {
      */
     public static trimLeft(text: string, chars: string = "\\s") {
         const expression = new RegExp("^[" + chars + "]+");
+
         return text.replace(expression, "");
     }
 
@@ -45,6 +46,7 @@ export class TextUtilities {
      */
     public static trimRight(text: string, chars: string = "\\s") {
         const expression = new RegExp("[" + chars + "]+$");
+
         return text.replace(expression, "");
     }
 
@@ -63,6 +65,7 @@ export class TextUtilities {
      */
     public static trim(text: string, chars: string = "\\s") {
         const expression = new RegExp("(^[" + chars + "]+|[" + chars + "]+$)", "g");
+
         return text.replace(expression, "");
     }
 
@@ -143,6 +146,7 @@ export class TextUtilities {
                         // cut at next possible whitespace after the limit
                         if (!cutIndex) {
                             const [charsUntilNextWhitespace] = (line.slice(length).match(firstWhitespaceExpression) || [""]);
+
                             cutIndex = slice.length + charsUntilNextWhitespace.length;
                         }
                     }

@@ -1,7 +1,7 @@
 /*
  * This file is part of the @mscs/console package.
  *
- * Copyright (c) 2020 media-service consulting & solutions GmbH
+ * Copyright (c) 2021 media-service consulting & solutions GmbH
  *
  * For the full copyright and license information, please view the LICENSE
  * File that was distributed with this source code.
@@ -13,7 +13,7 @@ import { OutputFormatterStyleInterface } from "./OutputFormatterStyleInterface";
 
 export class OutputFormatterStyleStack {
 
-    private styles: OutputFormatterStyleInterface[];
+    private styles!: OutputFormatterStyleInterface[];
 
     private emptyStyle: OutputFormatterStyleInterface;
 
@@ -48,6 +48,7 @@ export class OutputFormatterStyleStack {
         for (const [index, item] of items) {
             if (item.apply("") === style.apply("")) {
                 this.styles = this.styles.slice(0, index as number);
+
                 return item;
             }
         }

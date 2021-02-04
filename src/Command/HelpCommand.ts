@@ -1,7 +1,7 @@
 /*
  * This file is part of the @mscs/console package.
  *
- * Copyright (c) 2020 media-service consulting & solutions GmbH
+ * Copyright (c) 2021 media-service consulting & solutions GmbH
  *
  * For the full copyright and license information, please view the LICENSE
  * File that was distributed with this source code.
@@ -63,6 +63,7 @@ To display the list of available commands, please use the <info>list</info> comm
         if (null === this.command) {
             const name = input.getArgument("commandName");
             const application = this.getApplication();
+
             if (name && typeof name === "string" && application) {
                 this.command = application.find(name);
             }
@@ -70,6 +71,7 @@ To display the list of available commands, please use the <info>list</info> comm
 
         if (this.command) {
             const helper = new DescriptorHelper();
+
             helper.describe(output, this.command, {
                 format: input.getOption("format"),
                 rawText: input.getOption("raw"),

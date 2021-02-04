@@ -1,7 +1,7 @@
 /*
  * This file is part of the @mscs/console package.
  *
- * Copyright (c) 2020 media-service consulting & solutions GmbH
+ * Copyright (c) 2021 media-service consulting & solutions GmbH
  *
  * For the full copyright and license information, please view the LICENSE
  * File that was distributed with this source code.
@@ -9,6 +9,7 @@
 
 import * as os from "os";
 import { Writable } from "stream";
+
 import { OutputFormatterInterface } from "../Formatter/OutputFormatterInterface";
 import { AbstractHelper } from "../Helper/AbstractHelper";
 import { Terminal } from "../Terminal";
@@ -82,8 +83,10 @@ export class ConsoleSectionOutput extends StreamOutput {
      */
     public addContent(input: string) {
         const lines = input.split(os.EOL);
+
         for (const line of lines) {
             const width = Math.ceil(this.getDisplayLength(line) / this.terminal.getWidth());
+
             if (width > 0) {
                 this.lines += width;
             } else {
@@ -100,6 +103,7 @@ export class ConsoleSectionOutput extends StreamOutput {
     protected doWrite(message: string, newline: boolean): void {
         if (!this.isDecorated()) {
             super.doWrite(message, newline);
+
             return;
         }
 

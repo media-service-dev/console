@@ -1,7 +1,7 @@
 /*
  * This file is part of the @mscs/console package.
  *
- * Copyright (c) 2020 media-service consulting & solutions GmbH
+ * Copyright (c) 2021 media-service consulting & solutions GmbH
  *
  * For the full copyright and license information, please view the LICENSE
  * File that was distributed with this source code.
@@ -23,11 +23,11 @@ export class ApplicationDescription {
 
     private showHidden: boolean;
 
-    private namespaces: Map<string, NamespaceData>;
+    private namespaces!: Map<string, NamespaceData>;
 
-    private commands: Map<string, CommandInterface>;
+    private commands!: Map<string, CommandInterface>;
 
-    private aliases: Map<string, CommandInterface>;
+    private aliases!: Map<string, CommandInterface>;
 
     public constructor(application: ApplicationInterface, namespace: string | null = null, showHidden: boolean = false) {
         this.application = application;
@@ -72,6 +72,7 @@ export class ApplicationDescription {
             ? this.application.findNamespace(this.namespace)
             : null);
         const sorted = this.sortCommands(all);
+
         for (const [namespace, commands] of sorted.entries()) {
             const names: string[] = [];
 
@@ -100,6 +101,7 @@ export class ApplicationDescription {
 
         for (const [name, command] of commands) {
             const key = this.application.extractNamespace(name, 1);
+
             if (key === "" || key === ApplicationDescription.GLOBAL_NAMESPACE) {
                 globalCommands.set(name, command);
             } else {
@@ -107,6 +109,7 @@ export class ApplicationDescription {
                     namespacesCommands.set(key, new Map<string, CommandInterface>());
                 }
                 const map = namespacesCommands.get(key);
+
                 if (map) {
                     map.set(name, command);
                 }
@@ -115,6 +118,7 @@ export class ApplicationDescription {
 
         if (globalCommands.size) {
             const items = new Map([...globalCommands].sort());
+
             sortedCommands.set(ApplicationDescription.GLOBAL_NAMESPACE, items);
         }
 
@@ -126,6 +130,7 @@ export class ApplicationDescription {
                 if (currentIsInteger && nextIsInteger) {
                     const currentInteger = NumberUtilities.parseIntStrict(currentNamespace);
                     const nextInteger = NumberUtilities.parseIntStrict(nextNamespace);
+
                     if (currentInteger === nextInteger) {
                         return 0;
                     }
@@ -136,10 +141,13 @@ export class ApplicationDescription {
                 } else if (nextIsInteger) {
                     return -1;
                 }
+
                 return currentNamespace.localeCompare(nextNamespace);
             }));
+
             for (const [key, commandsSet] of items) {
                 const sortedCommandsSet = new Map<string, CommandInterface>([...commandsSet].sort());
+
                 sortedCommands.set(key, sortedCommandsSet);
             }
         }

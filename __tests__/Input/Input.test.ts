@@ -1,7 +1,7 @@
 /*
  * This file is part of the @mscs/console package.
  *
- * Copyright (c) 2020 media-service consulting & solutions GmbH
+ * Copyright (c) 2021 media-service consulting & solutions GmbH
  *
  * For the full copyright and license information, please view the LICENSE
  * File that was distributed with this source code.
@@ -188,6 +188,7 @@ describe("Input", () => {
         it("should throw if argument is missing", () => {
             // Arrange
             const input = new CollectionInput([]);
+
             input.bind(new InputDefinition([new ArgumentDefinition("name", ArgumentMode.REQUIRED)]));
 
             // Act & Assert
@@ -199,6 +200,7 @@ describe("Input", () => {
         it("should throw on missing required arguments with optional", () => {
             // Arrange
             const input = new CollectionInput([["bar", "baz"]]);
+
             input.bind(new InputDefinition([new ArgumentDefinition("name", ArgumentMode.REQUIRED), new ArgumentDefinition("bar", ArgumentMode.OPTIONAL)]));
 
             // Act & Assert
@@ -210,6 +212,7 @@ describe("Input", () => {
         it("should validate", () => {
             // Arrange
             const input = new CollectionInput([["name", "foo"]]);
+
             input.bind(new InputDefinition([new ArgumentDefinition("name", ArgumentMode.REQUIRED)]));
 
             // Act & Assert
@@ -264,6 +267,7 @@ describe("Input", () => {
             // Arrange
             const input = new CollectionInput([]);
             const stream = new TesterDuplexStream();
+
             input.setStream(stream);
 
             // Act

@@ -1,13 +1,14 @@
 /*
  * This file is part of the @mscs/console package.
  *
- * Copyright (c) 2020 media-service consulting & solutions GmbH
+ * Copyright (c) 2021 media-service consulting & solutions GmbH
  *
  * For the full copyright and license information, please view the LICENSE
  * File that was distributed with this source code.
  */
 
 import * as os from "os";
+
 import { OutputFormatter } from "../../src/Formatter/OutputFormatter";
 import { ConsoleSectionOutput } from "../../src/Output/ConsoleSectionOutput";
 import { OutputMode } from "../../src/Output/OutputMode";
@@ -38,6 +39,7 @@ describe("ConsoleSectionOutput", () => {
 
         // Assert
         const data: string[] = await promisifyStream(stream);
+
         expect(data).toEqual(["FOO" + os.EOL + "Bar" + os.EOL + "\u001b[2A\u001b[0J"]);
     });
 
@@ -52,6 +54,7 @@ describe("ConsoleSectionOutput", () => {
 
         // Assert
         const data: string[] = await promisifyStream(stream);
+
         expect(data).toEqual(["Foo\nBar\nBaz\nFooBar" + os.EOL + "\u001b[2A\u001b[0J"]);
     });
 
@@ -70,6 +73,7 @@ describe("ConsoleSectionOutput", () => {
 
         // Assert
         const data: string[] = await promisifyStream(stream);
+
         expect(data).toEqual(["Foo" + os.EOL + "Bar" + os.EOL + "\u001b[1A\u001b[0J\u001b[1A\u001b[0JBaz" + os.EOL + "Foo" + os.EOL]);
     });
 
@@ -87,6 +91,7 @@ describe("ConsoleSectionOutput", () => {
 
         // Assert
         const data: string[] = await promisifyStream(stream);
+
         expect(data).toEqual([os.EOL + "foo" + os.EOL + "\u001b[1A\u001b[0J\u001b[1A\u001b[0Jbar" + os.EOL + os.EOL]);
     });
 
@@ -101,6 +106,7 @@ describe("ConsoleSectionOutput", () => {
 
         // Assert
         const data: string[] = await promisifyStream(stream);
+
         expect(data).toEqual(["Foo" + os.EOL + "\u001b[1A\u001b[0JBar" + os.EOL]);
     });
 
@@ -115,6 +121,7 @@ describe("ConsoleSectionOutput", () => {
 
         // Assert
         const data: string[] = await promisifyStream(stream);
+
         expect(data).toEqual(["Foo" + os.EOL + "Bar" + os.EOL + "Baz" + os.EOL + "\u001b[3A\u001b[0JBar" + os.EOL]);
     });
 
@@ -146,6 +153,7 @@ describe("ConsoleSectionOutput", () => {
 
         // Assert
         const data: string[] = await promisifyStream(stream);
+
         expect(data).toEqual(["Foo" + os.EOL + "Bar" + os.EOL + "\u001b[2A\u001b[0JBar" + os.EOL + "\u001b[1A\u001b[0JBaz" + os.EOL + "Bar" + os.EOL + "\u001b[1A\u001b[0JFoobar" + os.EOL]);
     });
 

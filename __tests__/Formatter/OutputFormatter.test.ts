@@ -1,13 +1,14 @@
 /*
  * This file is part of the @mscs/console package.
  *
- * Copyright (c) 2020 media-service consulting & solutions GmbH
+ * Copyright (c) 2021 media-service consulting & solutions GmbH
  *
  * For the full copyright and license information, please view the LICENSE
  * File that was distributed with this source code.
  */
 
 import each from "jest-each";
+
 import { OutputFormatter } from "../../src/Formatter/OutputFormatter";
 import { OutputFormatterStyle } from "../../src/Formatter/OutputFormatterStyle";
 
@@ -16,6 +17,7 @@ describe("OutputFormatter", () => {
     it("should handle empty tag", () => {
         const formatter = new OutputFormatter(true);
         const result = formatter.format("foo<>bar");
+
         expect(result).toBe("foo<>bar");
     });
 
@@ -26,6 +28,7 @@ describe("OutputFormatter", () => {
         expect(formatter.format("foo << bar")).toBe("foo << bar");
         expect(formatter.format("foo << bar \\")).toBe("foo << bar \\");
         const value = formatter.format("foo << <info>bar \\ baz</info> \\");
+
         expect(value).toBe("foo << \u001b[32mbar \\ baz\u001b[39m \\");
         expect(formatter.format("\\<info>some info\\</info>")).toBe("<info>some info</info>");
         expect(OutputFormatter.escapeBackslashes("<info>some info</info>")).toBe("\\<info>some info\\</info>");
@@ -80,15 +83,18 @@ describe("OutputFormatter", () => {
         const formatter = new OutputFormatter(true);
 
         const style = new OutputFormatterStyle("blue", "white");
+
         formatter.setStyle("test", style);
 
         expect(formatter.getStyle("test")).toBe(style);
         expect(formatter.getStyle("info")).not.toBe(style);
 
         const secondStyle = new OutputFormatterStyle("blue", "white");
+
         formatter.setStyle("b", secondStyle);
 
         const result = formatter.format("<test>some <b>custom</b> msg</test>");
+
         expect(result).toBe("\u001b[34;47msome \u001b[39;49m\u001b[34;47mcustom\u001b[39;49m\u001b[34;47m msg\u001b[39;49m");
     });
 
@@ -96,6 +102,7 @@ describe("OutputFormatter", () => {
         const formatter = new OutputFormatter(true);
 
         const style = new OutputFormatterStyle("blue", "white");
+
         formatter.setStyle("info", style);
 
         expect(formatter.format("<info>some custom msg</info>")).toBe("\u001b[34;47msome custom msg\u001b[39;49m");
@@ -125,6 +132,7 @@ describe("OutputFormatter", () => {
 
             const styleString = tag.slice(1, -1);
             const result = (formatter as any).createStyleFromString(styleString);
+
             if (null === expected) {
                 expect(result).toBeNull();
                 expected = tag + input + "</" + styleString + ">";
