@@ -25,16 +25,20 @@ describe("HybridCollection tests", () => {
 
     it("should correctly delete", () => {
         const collection = new HybridCollection<string>(["foo", ["foo", "bar"], "bar", "baz"]);
+
         collection.delete(1);
         const entries = Array.from(collection.entries());
+
         expect(entries).toEqual([[0, "foo"], ["foo", "bar"], [2, "baz"]]);
     });
 
     it("should correctly reset", () => {
         const collection = new HybridCollection<string>(["foo", ["foo", "bar"], "bar", "baz"]);
+
         collection.delete(1);
         const resetedCollection = (collection as any).resetKeys();
         const entries = Array.from(resetedCollection.entries());
+
         expect(entries).toEqual([[0, "foo"], ["foo", "bar"], [1, "baz"]]);
     });
 
@@ -52,6 +56,7 @@ describe("HybridCollection tests", () => {
         );
 
         const entries = Array.from(merged.entries());
+
         expect(entries).toEqual([
             [0, "foo"],
             ["foo", "newBar"],

@@ -100,14 +100,17 @@ export class JsonDescriptor extends AbstractDescriptor<BaseDescriptorOptions> {
 
     private getInputDefinitionData(inputDefinition: InputDefinition): InputDefinitionData {
         const inputArguments: { [key: string]: ArgumentDefinitionData } = {};
+
         for (const [name, argument] of inputDefinition.getArguments().entries()) {
             inputArguments[name] = this.getArgumentDefinitionData(argument);
         }
 
         const inputOptions: { [key: string]: OptionDefinitionData } = {};
+
         for (const [name, option] of inputDefinition.getOptions()) {
             inputOptions[name] = this.getOptionDefinitionData(option);
         }
+
         return { arguments: inputArguments, options: inputOptions };
     }
 

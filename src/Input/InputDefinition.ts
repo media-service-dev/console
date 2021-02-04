@@ -86,6 +86,7 @@ export class InputDefinition {
 
         if (typeof name === "number") {
             const values = Array.from(this.arguments.values());
+
             return values[name];
         }
 
@@ -115,6 +116,7 @@ export class InputDefinition {
     public hasArgument(name: HybridCollectionKeyType): boolean {
         if (typeof name === "number") {
             const values = Array.from(this.arguments.values());
+
             return typeof values[name] !== "undefined";
         }
 
@@ -127,9 +129,11 @@ export class InputDefinition {
         }
 
         const optionsShortcut = option.getShortcut();
+
         if (optionsShortcut) {
             const shortcuts = optionsShortcut.split("|");
             const shortcutKeys = Array.from(this.shortcuts.keys());
+
             for (const shortcut of shortcuts) {
                 if (-1 !== shortcutKeys.indexOf(shortcut)) {
                     throw new LogicException(`An option with shortcut "${shortcut}" already exists.`);
@@ -140,6 +144,7 @@ export class InputDefinition {
         this.options.set(option.getName(), option);
         if (optionsShortcut) {
             const shortcuts = optionsShortcut.split("|");
+
             for (const shortcut of shortcuts) {
                 this.shortcuts.set(shortcut, option.getName());
             }
@@ -218,11 +223,13 @@ export class InputDefinition {
 
     public getSynopsis(short: boolean = false): string {
         const elements: string[] = [];
+
         if (short && this.getOptions().size) {
             elements.push("[options]");
         } else if (!short) {
             for (const option of this.getOptions().values()) {
                 let value = "";
+
                 if (option.acceptValue()) {
                     value = [
                         option.isValueOptional()
@@ -238,6 +245,7 @@ export class InputDefinition {
                 const shortcut = option.getShortcut()
                     ? `-${option.getShortcut()}|`
                     : "";
+
                 elements.push(`[${shortcut}--${option.getName()}${value ? " " + value : ""}]`);
             }
         }

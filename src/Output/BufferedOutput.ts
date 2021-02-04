@@ -8,6 +8,7 @@
  */
 
 import * as os from "os";
+
 import { AbstractOutput } from "./AbstractOutput";
 
 export class BufferedOutput extends AbstractOutput {
@@ -16,6 +17,7 @@ export class BufferedOutput extends AbstractOutput {
 
     public fetch(): string {
         const content = this.buffer;
+
         this.buffer = "";
 
         return content;

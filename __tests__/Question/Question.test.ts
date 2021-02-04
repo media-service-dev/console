@@ -55,6 +55,7 @@ describe("Question tests", () => {
 
     it("should handle hidden get and set", () => {
         const question = new Question("Foo?");
+
         expect(question.isHidden()).toBeFalsy();
         question.setHidden(true);
         expect(question.isHidden()).toBeTruthy();
@@ -62,6 +63,7 @@ describe("Question tests", () => {
 
     it("should handle trimmable get and set", () => {
         const question = new Question("Foo?");
+
         expect(question.isTrimmable()).toBeTruthy();
         question.setTrimmable(false);
         expect(question.isTrimmable()).toBeFalsy();
@@ -73,6 +75,7 @@ describe("Question tests", () => {
             if (!value) {
                 throw new Error("error");
             }
+
             return value;
         };
 

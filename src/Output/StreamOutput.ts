@@ -10,6 +10,7 @@
 import * as os from "os";
 import { Writable } from "stream";
 import { WriteStream } from "tty";
+
 import { ArgumentException } from "../Exception/ArgumentException";
 import { OutputFormatterInterface } from "../Formatter/OutputFormatterInterface";
 import { AbstractOutput } from "./AbstractOutput";

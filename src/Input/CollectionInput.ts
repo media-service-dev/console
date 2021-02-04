@@ -146,6 +146,7 @@ export class CollectionInput<Arguments extends InputArguments = {}, Options exte
         }
 
         const options = this.definition.getOption(name);
+
         if (null === value) {
             if (options.isValueRequired()) {
                 throw new RuntimeException(`The "--${name}" option requires a value.`);

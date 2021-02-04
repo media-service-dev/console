@@ -8,6 +8,7 @@
  */
 
 import each from "jest-each";
+
 import { TextDescriptor } from "../../src/Descriptor/TextDescriptor";
 import { TesterDuplexStream } from "../../src/Tester/TesterDuplexStream";
 import { createOutput } from "../Helper/Utils/CreateOutput";
@@ -30,6 +31,7 @@ describe("TextDescriptor", () => {
             const stream = output.getStream() as TesterDuplexStream;
             const buffer = stream.getContents();
             const actual = buffer.toString().trim();
+
             expect(actual).toBe(expected);
         });
 
@@ -45,6 +47,7 @@ describe("TextDescriptor", () => {
             const stream = output.getStream() as TesterDuplexStream;
             const buffer = stream.getContents();
             const actual = buffer.toString().trim();
+
             expect(actual).toBe(expected);
         });
 
@@ -60,6 +63,7 @@ describe("TextDescriptor", () => {
             const stream = output.getStream() as TesterDuplexStream;
             const buffer = stream.getContents();
             const actual = buffer.toString().trim();
+
             expect(actual).toBe(expected);
         });
 
@@ -75,6 +79,7 @@ describe("TextDescriptor", () => {
             const stream = output.getStream() as TesterDuplexStream;
             const buffer = stream.getContents();
             const actual = buffer.toString().trim();
+
             expect(actual).toBe(expected);
         });
 
@@ -90,6 +95,7 @@ describe("TextDescriptor", () => {
             const stream = output.getStream() as TesterDuplexStream;
             const buffer = stream.getContents();
             const actual = buffer.toString().trim();
+
             expect(actual).toBe(expected);
         });
 

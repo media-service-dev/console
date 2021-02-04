@@ -23,6 +23,7 @@ describe("HelperSet", () => {
 
             // Assert
             const actual = helperSet.get("mock");
+
             expect(actual).toBe(helper);
         });
 
@@ -122,6 +123,7 @@ describe("HelperSet", () => {
             const commandFoo = new Command("foo");
             const commandBar = new Command("bar");
             const helperSet = new HelperSet();
+
             helperSet.setCommand(commandFoo);
 
             // Act
@@ -138,6 +140,7 @@ describe("HelperSet", () => {
             // Arrange
             const command = new Command("foo");
             const helperSet = new HelperSet();
+
             helperSet.setCommand(command);
 
             // Act

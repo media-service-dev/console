@@ -14,6 +14,7 @@ describe("OutputFormatterStyle", () => {
 
     it("should construct", () => {
         let style = new OutputFormatterStyle("green", "black", ["bold", "underscore"]);
+
         expect(style.apply("foo")).toBe("\u001b[32;40;1;4mfoo\u001b[39;49;22;24m");
 
         style = new OutputFormatterStyle("red", null, ["blink"]);

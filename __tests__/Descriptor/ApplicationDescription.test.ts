@@ -8,6 +8,7 @@
  */
 
 import each from "jest-each";
+
 import { Command } from "../../src/Command/Command";
 import { ApplicationDescription } from "../../src/Descriptor/ApplicationDescription";
 import { TestApplication } from "./Mock/TestApplication";

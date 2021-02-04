@@ -26,6 +26,7 @@ describe("NullOutputFormatterStyle", () => {
     it("should not set background", () => {
         // Arrange
         const formatter: OutputFormatterStyleInterface = new NullOutputFormatterStyle();
+
         formatter.setBackground("black");
 
         // Act
@@ -38,6 +39,7 @@ describe("NullOutputFormatterStyle", () => {
     it("should not set foreground", () => {
         // Arrange
         const formatter: OutputFormatterStyleInterface = new NullOutputFormatterStyle();
+
         formatter.setForeground("black");
 
         // Act
@@ -50,6 +52,7 @@ describe("NullOutputFormatterStyle", () => {
     it("should not set option", () => {
         // Arrange
         const formatter: OutputFormatterStyleInterface = new NullOutputFormatterStyle();
+
         formatter.setOption("bold");
         formatter.setOption("conceal");
 

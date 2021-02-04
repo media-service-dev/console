@@ -15,7 +15,7 @@ export class HelperSet {
 
     private helpers: Map<string, HelperInterface> = new Map<string, HelperInterface>();
 
-    private command: CommandInterface | null;
+    private command!: CommandInterface | null;
 
     public constructor(helpers: HelperInterface[] | null = null) {
         if (null !== helpers) {

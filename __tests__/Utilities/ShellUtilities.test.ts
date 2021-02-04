@@ -8,6 +8,7 @@
  */
 
 import each from "jest-each";
+
 import { ShellUtilities } from "../../src/Utilities/ShellUtilities";
 
 describe("ShellUtilities tests", () => {
@@ -18,16 +19,19 @@ describe("ShellUtilities tests", () => {
         ["--fo2=o", "'--fo2=o'"],
     ]).it("should escape token", (input, expected) => {
         const result = ShellUtilities.escapeToken(input);
+
         expect(result).toBe(expected);
     });
 
     it("should escape argument", () => {
         const result = ShellUtilities.escapeShellArgument("foo bar");
+
         expect(result).toBe("'foo bar'");
     });
 
     it("should escape argument that contains apostrophe", () => {
         const result = ShellUtilities.escapeShellArgument("foo's bar");
+
         expect(result).toBe("'foo\\'s bar'");
     });
 

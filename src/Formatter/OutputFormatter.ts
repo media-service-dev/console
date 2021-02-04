@@ -51,10 +51,12 @@ export class OutputFormatter implements WrappableOutputFormatterInterface {
     public static escapeTrailingBackslash(text: string): string {
         if ("\\" === text.substr(-1)) {
             const { length } = text;
+
             text = TextUtilities.trimRight(text, "\\\\");
             text = text.replace(/\0/g, "");
             text += "\0".repeat(length - text.length);
         }
+
         return text;
     }
 
@@ -93,6 +95,7 @@ export class OutputFormatter implements WrappableOutputFormatterInterface {
             }
 
             const style = this.createStyleFromString(tag);
+
             if (null === style) {
                 output += this.applyCurrentStyle(text, output, width, currentLineLength);
             } else if (open) {
@@ -161,6 +164,7 @@ export class OutputFormatter implements WrappableOutputFormatterInterface {
                 style.setBackground(value);
             } else if ("options" === type) {
                 const options = ExpressionUtilities.matchAll(value, /([^,;]+)/g);
+
                 for (const option of options) {
                     option.shift();
                     for (const item of option) {
@@ -197,13 +201,16 @@ export class OutputFormatter implements WrappableOutputFormatterInterface {
 
         if (currentLineLength.length) {
             const i = width - currentLineLength.length;
+
             prefix = text.substr(0, i) + "\n";
             text = text.substr(i);
         }
 
         const matches = ExpressionUtilities.matchAll(text, new RegExp("(\\n)$", "g"));
+
         text = prefix + text.replace(new RegExp(`([^\\n]{${width}}) *`, "g"), "$1\n");
         const items = Array.from(matches);
+
         text = TextUtilities.trimRight(text, "\n") + ((items[0] ?? [])[1] ?? "");
 
         if (!currentLineLength.length && "" !== current && "\n" !== current.substr(-1)) {

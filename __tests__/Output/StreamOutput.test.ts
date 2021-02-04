@@ -8,6 +8,7 @@
  */
 
 import * as os from "os";
+
 import { ArgumentException } from "../../src/Exception/ArgumentException";
 import { OutputMode } from "../../src/Output/OutputMode";
 import { StreamOutput } from "../../src/Output/StreamOutput";
@@ -40,6 +41,7 @@ describe("StreamOutput", () => {
 
     it("should return stream", () => {
         const output = new StreamOutput(stream);
+
         expect(output.getStream()).toBe(stream);
     });
 

@@ -24,6 +24,7 @@ export class TesterDuplexStream extends Duplex {
 
     public _read(size: number) {
         const result = this.contents.slice(0, size);
+
         this.contents = this.contents.slice(size);
         this.push(result);
     }

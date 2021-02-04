@@ -21,7 +21,7 @@ export class ArgvInput<Arguments extends InputArguments = {}, Options extends In
 
     protected tokens: string[];
 
-    protected parsed: string[];
+    protected parsed!: string[];
 
     public constructor(parameters: string[] | null = null, definition: InputDefinition | null = null) {
         super();
@@ -52,11 +52,13 @@ export class ArgvInput<Arguments extends InputArguments = {}, Options extends In
                 const leading = 0 === value.indexOf("--")
                     ? value + "="
                     : value;
+
                 if (token === value || "" !== leading && 0 === token.indexOf(leading)) {
                     return true;
                 }
             }
         }
+
         return false;
     }
 
@@ -68,6 +70,7 @@ export class ArgvInput<Arguments extends InputArguments = {}, Options extends In
 
             if (token && "-" === token.charAt(0)) {
                 const next = NumberUtilities.parseIntStrict(i) + 1;
+
                 if (-1 !== token.indexOf("=") || typeof this.tokens[next] === "undefined") {
                     continue;
                 }
@@ -88,6 +91,7 @@ export class ArgvInput<Arguments extends InputArguments = {}, Options extends In
                 isOption = false;
                 continue;
             }
+
             return token;
         }
 
@@ -100,8 +104,10 @@ export class ArgvInput<Arguments extends InputArguments = {}, Options extends In
         }
 
         const tokens = [...this.tokens];
+
         while (0 < tokens.length) {
             const token = tokens.shift() as string;
+
             if (onlyParams && "--" === token) {
                 return defaultValue;
             }
@@ -115,6 +121,7 @@ export class ArgvInput<Arguments extends InputArguments = {}, Options extends In
                 const leading = 0 === value.indexOf("--")
                     ? value + "="
                     : value;
+
                 if (token === value || "" !== leading && 0 === token.indexOf(leading)) {
                     return token.slice(leading.length);
                 }
@@ -127,6 +134,7 @@ export class ArgvInput<Arguments extends InputArguments = {}, Options extends In
     public toString(): string {
         const tokens = this.tokens.map((token) => {
             const match = token.match(/^(-[^=]+=)(.+)/);
+
             if (match) {
                 return match[1] + ShellUtilities.escapeToken(match[2]);
             }
@@ -143,6 +151,7 @@ export class ArgvInput<Arguments extends InputArguments = {}, Options extends In
 
     protected parse() {
         let parseOptions = true;
+
         this.parsed = [...this.tokens];
         let token: string | null = this.parsed.shift() ?? null;
 
@@ -169,6 +178,7 @@ export class ArgvInput<Arguments extends InputArguments = {}, Options extends In
 
         if (this.definition.hasArgument(length)) { // if input is expecting another argument, add it
             const argument = this.definition.getArgument(length);
+
             if (argument.isArray()) {
                 this.arguments.set(argument.getName(), [token]);
             } else {
@@ -177,6 +187,7 @@ export class ArgvInput<Arguments extends InputArguments = {}, Options extends In
         } else if (this.definition.hasArgument(lastIndex) && this.definition.getArgument(lastIndex).isArray()) { // if last argument isArray(), append token to last argument
             const argument = this.definition.getArgument(lastIndex);
             const value = this.arguments.get(argument.getName()) as ArgumentValue;
+
             if (Array.isArray(value)) {
                 value.push(token);
             }
@@ -186,6 +197,7 @@ export class ArgvInput<Arguments extends InputArguments = {}, Options extends In
 
             if (args.size) {
                 const keys = Array.from(args.keys()).filter(item => item !== "command");
+
                 throw new RuntimeException(`Too many arguments, expected arguments "${keys.join("\" \"")}".`);
             }
 
@@ -197,8 +209,10 @@ export class ArgvInput<Arguments extends InputArguments = {}, Options extends In
         const name = token.slice(2);
 
         const position = name.indexOf("=");
+
         if (-1 !== position) {
             const value = name.slice(position + 1);
+
             if (0 === value.length) {
                 this.parsed.unshift(value);
             }
@@ -223,6 +237,7 @@ export class ArgvInput<Arguments extends InputArguments = {}, Options extends In
             // if option accepts an optional or mandatory argument
             // let's see if there is one provided
             const next = this.parsed.shift();
+
             if (typeof next === "string") {
                 if (next.indexOf("-") !== 0 || (next === "" || next === null)) {
                     value = next;
@@ -244,6 +259,7 @@ export class ArgvInput<Arguments extends InputArguments = {}, Options extends In
 
         if (option.isArray()) {
             let item = this.options.get(name);
+
             if (!item) {
                 item = [];
             }
@@ -288,6 +304,7 @@ export class ArgvInput<Arguments extends InputArguments = {}, Options extends In
             }
 
             const option = this.definition.getOptionForShortcut(name[i]);
+
             if (option.acceptValue()) {
                 this.addLongOption(option.getName(), i === length - 1
                     ? null

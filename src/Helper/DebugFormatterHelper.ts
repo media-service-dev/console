@@ -98,6 +98,7 @@ export class DebugFormatterHelper extends AbstractHelper {
             this.started.set(id, { border: ++this.count % this.colors.length });
         }
         const item = this.started.get(id) as Format;
+
         return `<bg=${this.colors[item.border]}> </>`;
     }
 

@@ -20,7 +20,7 @@ export class OptionDefinition {
 
     private readonly mode: OptionMode;
 
-    private defaultValue: OptionValue;
+    private defaultValue!: OptionValue;
 
     private readonly description: string;
 
@@ -44,6 +44,7 @@ export class OptionDefinition {
                     if (item.indexOf("-") === 0) {
                         return item.slice(1);
                     }
+
                     return item;
                 })
                 .filter(item => item.length);

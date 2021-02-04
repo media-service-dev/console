@@ -36,20 +36,26 @@ export class LineByLineStream extends Readable {
             this.push(null);
         } else {
             const data = this.contents.toString("utf8");
+
             for (let index = 0; index < data.length; index++) {
                 const character = data.charAt(index);
                 const nextCharacter = data.charAt(index + 1);
+
                 if ("\r" === character && "\n" === nextCharacter) {
                     const item = data.slice(0, index + 1);
                     const rest = data.slice(index + 2);
+
                     this.contents = Buffer.from(rest);
                     this.push(item, "utf8");
+
                     return;
                 } else if ("\n" === character || "\r" === character) {
                     const item = data.slice(0, index + 1);
                     const rest = data.slice(index + 1);
+
                     this.contents = Buffer.from(rest);
                     this.push(item, "utf8");
+
                     return;
                 }
             }

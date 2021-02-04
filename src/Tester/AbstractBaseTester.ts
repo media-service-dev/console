@@ -8,6 +8,7 @@
  */
 
 import * as os from "os";
+
 import { CommandInterface } from "../Command/CommandInterface";
 import { LogicException } from "../Exception/LogicException";
 import { RuntimeException } from "../Exception/RuntimeException";
@@ -20,13 +21,13 @@ import { TesterOutputOptions } from "./TesterOutputOptions";
 
 export abstract class AbstractBaseTester {
 
-    protected command: CommandInterface;
+    protected command!: CommandInterface;
 
-    protected input: CollectionInput;
+    protected input!: CollectionInput;
 
-    protected statusCode: number;
+    protected statusCode!: number;
 
-    protected output: StreamOutput;
+    protected output!: StreamOutput;
 
     protected inputs: string[] = [];
 
@@ -77,6 +78,7 @@ export abstract class AbstractBaseTester {
 
     public setInputs(inputs: string[]) {
         this.inputs = inputs;
+
         return this;
     }
 
@@ -100,6 +102,7 @@ export abstract class AbstractBaseTester {
             );
 
             const errorOutput = new StreamOutput(new TesterDuplexStream());
+
             errorOutput.setFormatter(this.output.getFormatter());
             errorOutput.setVerbosity(this.output.getVerbosity());
             errorOutput.setDecorated(this.output.isDecorated());

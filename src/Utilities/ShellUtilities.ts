@@ -57,6 +57,7 @@ export class ShellUtilities {
         if (token.match(/^[\w-]+$/)) {
             return token;
         }
+
         return this.escapeShellArgument(token);
 
     }

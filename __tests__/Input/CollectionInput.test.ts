@@ -8,6 +8,7 @@
  */
 
 import each from "jest-each";
+
 import { ArgumentDefinition } from "../../src/Input/ArgumentDefinition";
 import { CollectionInput } from "../../src/Input/CollectionInput";
 import { InputDefinition } from "../../src/Input/InputDefinition";
@@ -19,6 +20,7 @@ describe("CollectionInput tests", () => {
 
     it("should correct parse the first argument", () => {
         let input = new CollectionInput([]);
+
         expect(input.getFirstArgument()).toBeNull();
         input = new CollectionInput([["name", "Foo"]]);
         expect(input.getFirstArgument()).toBe("Foo");
@@ -28,6 +30,7 @@ describe("CollectionInput tests", () => {
 
     it("should detect correct if has parameter option", () => {
         let input = new CollectionInput([["name", "Foo"], ["--foo", "bar"]]);
+
         expect(input.hasParameterOption("--foo")).toBeTruthy();
         expect(input.hasParameterOption("--bar")).toBeFalsy();
 
@@ -41,6 +44,7 @@ describe("CollectionInput tests", () => {
 
     it("should return corrent parameter option", () => {
         let input = new CollectionInput([["name", "Foo"], ["--foo", "bar"]]);
+
         expect(input.getParameterOption("--foo")).toBe("bar");
         expect(input.getParameterOption("--bar", "default")).toBe("default");
 
@@ -141,6 +145,7 @@ describe("CollectionInput tests", () => {
             ["test", "Foo"],
             ["test2", "A\nB'C"],
         ]);
+
         expect(input.toString()).toBe("-f -b=bar --foo=" + ShellUtilities.escapeShellArgument("b a z") + " --lala Foo " + ShellUtilities.escapeShellArgument("A\nB'C"));
 
         input = new CollectionInput([

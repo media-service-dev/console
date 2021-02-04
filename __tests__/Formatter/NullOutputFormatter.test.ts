@@ -41,6 +41,7 @@ describe("NullOutputFormatter", () => {
             // Arrange
             const formatter: OutputFormatterInterface = new NullOutputFormatter();
             const style = new OutputFormatterStyle();
+
             formatter.setStyle("null", style);
 
             // Act
@@ -66,6 +67,7 @@ describe("NullOutputFormatter", () => {
         it("should always return false", () => {
             // Arrange
             const formatter: OutputFormatterInterface = new NullOutputFormatter();
+
             formatter.setStyle("null", new OutputFormatterStyle());
 
             // Act
@@ -91,6 +93,7 @@ describe("NullOutputFormatter", () => {
         it("should always return false", () => {
             // Arrange
             const formatter: OutputFormatterInterface = new NullOutputFormatter();
+
             formatter.setDecorated(true);
 
             // Act

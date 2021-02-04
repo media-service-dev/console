@@ -63,6 +63,7 @@ To display the list of available commands, please use the <info>list</info> comm
         if (null === this.command) {
             const name = input.getArgument("commandName");
             const application = this.getApplication();
+
             if (name && typeof name === "string" && application) {
                 this.command = application.find(name);
             }
@@ -70,6 +71,7 @@ To display the list of available commands, please use the <info>list</info> comm
 
         if (this.command) {
             const helper = new DescriptorHelper();
+
             helper.describe(output, this.command, {
                 format: input.getOption("format"),
                 rawText: input.getOption("raw"),

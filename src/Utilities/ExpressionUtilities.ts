@@ -22,6 +22,7 @@ export class ExpressionUtilities {
         }
 
         let currentMatch: RegExpExecArray | null = expression.exec(text);
+
         while (null !== currentMatch) {
             if (currentMatch.index === expression.lastIndex) {
                 expression.lastIndex++;

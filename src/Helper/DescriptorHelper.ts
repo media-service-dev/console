@@ -46,6 +46,7 @@ export class DescriptorHelper extends AbstractHelper {
         }
 
         const descriptor = this.descriptors.get(options.format);
+
         if (descriptor) {
             descriptor.describe(output, object, options);
         }

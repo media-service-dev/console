@@ -246,6 +246,7 @@ describe("OptionsDefinition", function () {
 
             // Assert
             const actual = option.getDefault();
+
             expect(actual).toBeNull();
         });
 
@@ -258,6 +259,7 @@ describe("OptionsDefinition", function () {
 
             // Assert
             const actual = option.getDefault();
+
             expect(actual).toBe("another");
         });
 
@@ -270,6 +272,7 @@ describe("OptionsDefinition", function () {
 
             // Assert
             const actual = option.getDefault();
+
             expect(actual).toEqual(["lorem", "ipsum"]);
         });
 

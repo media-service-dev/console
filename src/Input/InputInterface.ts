@@ -22,13 +22,13 @@ export interface InputInterface<Arguments extends InputArguments = {}, Options e
 
     getOption<OptionKeys extends keyof Options>(key: OptionKeys): Options[OptionKeys];
 
-    getOption<OptionKeys extends keyof Options>(key: HybridCollectionKeyType): OptionValue;
+    getOption<OptionKeys extends keyof Options>(key: HybridCollectionKeyType | OptionKeys): OptionValue;
 
     getOption<OptionKeys extends keyof Options>(key: OptionKeys | HybridCollectionKeyType): Options[OptionKeys] | OptionValue;
 
     setOption<OptionKeys extends keyof Options>(key: OptionKeys, value: Options[OptionKeys]): this;
 
-    setOption<OptionKeys extends keyof Options>(key: HybridCollectionKeyType, value: OptionValue): this;
+    setOption<OptionKeys extends keyof Options>(key: HybridCollectionKeyType | OptionKeys, value: OptionValue): this;
 
     setOption<OptionKeys extends keyof Options>(key: OptionKeys | HybridCollectionKeyType, value: Options[OptionKeys] | OptionValue): this;
 
@@ -40,13 +40,13 @@ export interface InputInterface<Arguments extends InputArguments = {}, Options e
 
     getArgument<ArgumentKeys extends keyof Arguments>(key: ArgumentKeys): Arguments[ArgumentKeys];
 
-    getArgument<ArgumentKeys extends keyof Arguments>(key: HybridCollectionKeyType): ArgumentValue;
+    getArgument<ArgumentKeys extends keyof Arguments>(key: HybridCollectionKeyType | ArgumentKeys): ArgumentValue;
 
     getArgument<ArgumentKeys extends keyof Arguments>(key: ArgumentKeys | HybridCollectionKeyType): Arguments[ArgumentKeys] | ArgumentValue;
 
     setArgument<ArgumentKeys extends keyof Arguments>(key: ArgumentKeys, value: Arguments[ArgumentKeys]): this;
 
-    setArgument<ArgumentKeys extends keyof Arguments>(key: HybridCollectionKeyType, value: ArgumentValue): this;
+    setArgument<ArgumentKeys extends keyof Arguments>(key: HybridCollectionKeyType | ArgumentKeys, value: ArgumentValue): this;
 
     setArgument<ArgumentKeys extends keyof Arguments>(key: ArgumentKeys | HybridCollectionKeyType, value: Arguments[ArgumentKeys] | ArgumentValue): this;
 

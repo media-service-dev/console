@@ -66,6 +66,7 @@ It's also possible to get raw list of commands (useful for embedding command run
     protected async execute(input: InputInterface<ListCommandArguments, ListCommandOptions>, output: OutputInterface): Promise<number> {
         const helper = new DescriptorHelper();
         const application = this.getApplication();
+
         if (application) {
             helper.describe(output, application, {
                 format: input.getOption("format"),

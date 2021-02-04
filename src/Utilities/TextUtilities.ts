@@ -27,6 +27,7 @@ export class TextUtilities {
      */
     public static trimLeft(text: string, chars: string = "\\s") {
         const expression = new RegExp("^[" + chars + "]+");
+
         return text.replace(expression, "");
     }
 
@@ -45,6 +46,7 @@ export class TextUtilities {
      */
     public static trimRight(text: string, chars: string = "\\s") {
         const expression = new RegExp("[" + chars + "]+$");
+
         return text.replace(expression, "");
     }
 
@@ -63,6 +65,7 @@ export class TextUtilities {
      */
     public static trim(text: string, chars: string = "\\s") {
         const expression = new RegExp("(^[" + chars + "]+|[" + chars + "]+$)", "g");
+
         return text.replace(expression, "");
     }
 
@@ -143,6 +146,7 @@ export class TextUtilities {
                         // cut at next possible whitespace after the limit
                         if (!cutIndex) {
                             const [charsUntilNextWhitespace] = (line.slice(length).match(firstWhitespaceExpression) || [""]);
+
                             cutIndex = slice.length + charsUntilNextWhitespace.length;
                         }
                     }

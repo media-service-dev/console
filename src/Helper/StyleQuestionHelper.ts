@@ -8,6 +8,7 @@
  */
 
 import * as util from "util";
+
 import { OutputFormatter } from "../Formatter/OutputFormatter";
 import { OutputInterface } from "../Output/OutputInterface";
 import { ChoiceQuestion } from "../Question/ChoiceQuestion";
@@ -36,6 +37,7 @@ export class StyleQuestionHelper extends QuestionHelper {
             const choices = (question).getChoices();
             const defaultValueString = (defaultValue ?? "") + "";
             const defaultChoice = choices.get(defaultValueString);
+
             text = util.format(" <info>%s</info> [<comment>%s</comment>]:", text, OutputFormatter.escapeBackslashes(defaultChoice ?? defaultValueString));
         } else {
             text = util.format(" <info>%s</info> [<comment>%s</comment>]:", text, OutputFormatter.escapeBackslashes((defaultValue ?? "") + ""));

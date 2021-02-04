@@ -8,6 +8,7 @@
  */
 
 import { Readable } from "stream";
+
 import { CollectionInput } from "../../../src/Input/CollectionInput";
 
 jest.mock("../../../src/Input/CollectionInput");

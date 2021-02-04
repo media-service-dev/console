@@ -8,6 +8,7 @@
  */
 
 import * as util from "util";
+
 import { ArgumentException } from "../Exception/ArgumentException";
 import { LogicException } from "../Exception/LogicException";
 import { Question } from "./Question";
@@ -88,8 +89,8 @@ export class ChoiceQuestion extends Question<string | string[]> {
         return this.simple;
     }
 
-    protected isSimpleChoices(choices: string[] | [string, string][]): choices is string[] {
-        return Array.isArray(choices) && choices.every((item: string | [string, string]) => typeof item === "string");
+    protected isSimpleChoices(choices: unknown[]): choices is string[] {
+        return Array.isArray(choices) && choices.every((item: unknown) => typeof item === "string");
     }
 
     protected isSimpleMap() {
@@ -137,6 +138,7 @@ export class ChoiceQuestion extends Question<string | string[]> {
             }
 
             const multiselectChoices: string[] = [];
+
             for (const item of selectedChoices) {
                 const results = [];
 
@@ -162,6 +164,7 @@ export class ChoiceQuestion extends Question<string | string[]> {
                     }
 
                     const key = flippedChoices.get(item);
+
                     if (key && choices.has(key)) {
                         multiselectChoices.push(key);
                         continue;
@@ -176,6 +179,7 @@ export class ChoiceQuestion extends Question<string | string[]> {
             }
 
             const [first] = multiselectChoices;
+
             return first;
         };
     }

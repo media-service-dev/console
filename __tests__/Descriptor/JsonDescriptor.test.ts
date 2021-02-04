@@ -8,6 +8,7 @@
  */
 
 import each from "jest-each";
+
 import { ApplicationInterface } from "../../src/Application/ApplicationInterface";
 import { JsonDescriptor } from "../../src/Descriptor/JsonDescriptor";
 import { TesterDuplexStream } from "../../src/Tester/TesterDuplexStream";
@@ -31,6 +32,7 @@ describe("JsonDescriptor", () => {
             const stream = output.getStream() as TesterDuplexStream;
             const buffer = stream.getContents();
             const actual = buffer.toString().trim();
+
             expect(JSON.parse(actual)).toEqual(expected);
         });
 
@@ -46,6 +48,7 @@ describe("JsonDescriptor", () => {
             const stream = output.getStream() as TesterDuplexStream;
             const buffer = stream.getContents();
             const actual = buffer.toString().trim();
+
             expect(JSON.parse(actual)).toEqual(expected);
         });
 
@@ -61,6 +64,7 @@ describe("JsonDescriptor", () => {
             const stream = output.getStream() as TesterDuplexStream;
             const buffer = stream.getContents();
             const actual = buffer.toString().trim();
+
             expect(JSON.parse(actual)).toEqual(expected);
         });
 
@@ -76,6 +80,7 @@ describe("JsonDescriptor", () => {
             const stream = output.getStream() as TesterDuplexStream;
             const buffer = stream.getContents();
             const actual = buffer.toString().trim();
+
             expect(JSON.parse(actual)).toEqual(expected);
         });
 
@@ -99,6 +104,7 @@ describe("JsonDescriptor", () => {
             const stream = output.getStream() as TesterDuplexStream;
             const buffer = stream.getContents();
             const actual = buffer.toString().trim();
+
             expect(JSON.parse(actual)).toEqual(expected);
         });
 

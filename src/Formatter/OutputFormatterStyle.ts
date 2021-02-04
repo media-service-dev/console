@@ -105,6 +105,7 @@ export class OutputFormatterStyle implements OutputFormatterStyleInterface {
     public setBackground(color: keyof ColorMapping | null = null): void {
         if (null === color) {
             this.background = null;
+
             return;
         }
 
@@ -118,6 +119,7 @@ export class OutputFormatterStyle implements OutputFormatterStyleInterface {
     public setForeground(color: keyof ColorMapping | null = null): void {
         if (null === color) {
             this.foreground = null;
+
             return;
         }
 
@@ -152,6 +154,7 @@ export class OutputFormatterStyle implements OutputFormatterStyleInterface {
         }
 
         const index = this.options.indexOf(OutputFormatterStyle.availableOptions[option]);
+
         if (index !== -1) {
             this.options.splice(index, 1);
         }

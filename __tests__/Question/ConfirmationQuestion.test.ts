@@ -8,6 +8,7 @@
  */
 
 import each from "jest-each";
+
 import { ConfirmationQuestion } from "../../src/Question/ConfirmationQuestion";
 
 describe("ConfirmationQuestion test", () => {
@@ -38,9 +39,11 @@ describe("ConfirmationQuestion test", () => {
 
         for (const answer of answers) {
             const normalizer = question.getNormalizer();
+
             expect(normalizer).not.toBeNull();
             if (normalizer) {
                 const actual = normalizer(answer);
+
                 expect(actual).toBe(expected);
             }
         }

@@ -23,6 +23,7 @@ export class TesterReadableStream extends Readable {
             this.push(null);
         } else {
             const result = this.contents.slice(0, size);
+
             this.contents = this.contents.slice(size);
             this.push(result);
         }

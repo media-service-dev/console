@@ -8,6 +8,7 @@
  */
 
 import each from "jest-each";
+
 import { NumberUtilities } from "../../src/Utilities/NumberUtilities";
 
 describe("NumberUtilities tests", () => {
@@ -25,6 +26,7 @@ describe("NumberUtilities tests", () => {
         ["123_456", NaN],
     ]).it("should parse int strict", (input, expected) => {
         const result = NumberUtilities.parseIntStrict(input);
+
         expect(result).toBe(expected);
     });
 
@@ -41,6 +43,7 @@ describe("NumberUtilities tests", () => {
         ["123_456", false],
     ]).it("should check int strict", (input, expected) => {
         const result = NumberUtilities.isIntStrict(input);
+
         expect(result).toBe(expected);
     });
 

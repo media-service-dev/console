@@ -17,7 +17,7 @@ export class ArgumentDefinition {
 
     private readonly mode: ArgumentMode;
 
-    private defaultValue: ArgumentValue;
+    private defaultValue!: ArgumentValue;
 
     private readonly description: string;
 

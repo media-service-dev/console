@@ -9,6 +9,7 @@
 
 import * as path from "path";
 import * as util from "util";
+
 import { ApplicationInterface } from "../Application/ApplicationInterface";
 import { ArgumentException } from "../Exception/ArgumentException";
 import { LogicException } from "../Exception/LogicException";
@@ -53,7 +54,7 @@ export class Command<Arguments extends InputArguments = {}, Options extends Inpu
 
     protected helperSet: HelperSet | null = null;
 
-    protected name: string;
+    protected name!: string;
 
     protected aliases: string[] = [];
 
@@ -115,6 +116,7 @@ export class Command<Arguments extends InputArguments = {}, Options extends Inpu
         input.validate();
 
         let statusCode;
+
         if (this.code) {
             statusCode = await this.code(input, output);
         } else {
@@ -196,12 +198,14 @@ export class Command<Arguments extends InputArguments = {}, Options extends Inpu
     // eslint-disable-next-line max-params
     public addArgument(name: string, mode: ArgumentMode = ArgumentMode.OPTIONAL, description: string = "", defaultValue: ArgumentValue | null = null): this {
         this.definition.addArgument(new ArgumentDefinition(name, mode, description, defaultValue));
+
         return this;
     }
 
     // eslint-disable-next-line max-params
     public addOption(name: string, shortcut: string | string[] | null = null, mode: OptionMode = OptionMode.VALUE_NONE, description: string = "", defaultValue: OptionValue | null = null): this {
         this.definition.addOption(new OptionDefinition(name, shortcut, mode, description, defaultValue));
+
         return this;
     }
 
@@ -212,6 +216,7 @@ export class Command<Arguments extends InputArguments = {}, Options extends Inpu
 
         if (!this.synopsis.has(key)) {
             const synopsis = this.definition.getSynopsis(short);
+
             this.synopsis.set(key, `${this.getName()}${synopsis.length > 0 ? " " + synopsis : ""}`);
         }
 
@@ -301,6 +306,7 @@ export class Command<Arguments extends InputArguments = {}, Options extends Inpu
 
         if (!this.applicationDefinitionMerged) {
             const options = Array.from(this.application.getDefinition().getOptions().values());
+
             this.definition.addOptions(options);
             this.applicationDefinitionMerged = true;
         }

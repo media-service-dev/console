@@ -8,6 +8,7 @@
  */
 
 import * as semver from "semver";
+
 import { Command } from "../Command/Command";
 import { CommandInterface } from "../Command/CommandInterface";
 import { HelpCommand } from "../Command/HelpCommand";
@@ -51,11 +52,11 @@ export class Application implements ApplicationInterface {
 
     private static EXIT_CODE_LIMIT = 255;
 
-    protected version: semver.SemVer;
+    protected version!: semver.SemVer;
 
-    protected name: string;
+    protected name!: string;
 
-    protected definition: InputDefinition;
+    protected definition!: InputDefinition;
 
     protected singleCommand: boolean = false;
 
@@ -73,7 +74,7 @@ export class Application implements ApplicationInterface {
 
     protected runningCommand: CommandInterface | null = null;
 
-    protected helperSet: HelperSet;
+    protected helperSet!: HelperSet;
 
     public constructor(name: string = "UNKNOWN", version: string = "0.1.0") {
         this.setName(name);
@@ -172,7 +173,9 @@ export class Application implements ApplicationInterface {
 
         if (this.singleCommand) {
             const inputDefinition = this.definition;
+
             inputDefinition.setArguments();
+
             return inputDefinition;
         }
 
@@ -222,10 +225,13 @@ export class Application implements ApplicationInterface {
         }
 
         const command = this.commands.get(name) as CommandInterface;
+
         if (this.wantHelps) {
             this.wantHelps = false;
             const helpCommand = this.get("help") as unknown as HelpCommand;
+
             helpCommand.setCommand(command);
+
             return helpCommand;
         }
 
@@ -234,6 +240,7 @@ export class Application implements ApplicationInterface {
 
     public has(name: string): boolean {
         this.init();
+
         return this.commands.has(name);
     }
 
@@ -257,6 +264,7 @@ export class Application implements ApplicationInterface {
 
     public extractNamespace(name: string, limit: number | null = null) {
         const parts = name.split(":");
+
         parts.pop();
 
         if (null === limit) {
@@ -269,11 +277,13 @@ export class Application implements ApplicationInterface {
     public extractAllNamespaces(name: string) {
         const namespaces: string[] = [];
         const parts = name.split(":");
+
         parts.pop();
 
         for (const part of parts) {
             if (namespaces.length > 0) {
                 const lastPart = namespaces[namespaces.length - 1];
+
                 namespaces.push(`${lastPart}:${part}`);
             } else {
                 namespaces.push(part);
@@ -304,6 +314,7 @@ export class Application implements ApplicationInterface {
         const expression = namespace.replace(/([^:]+|)/, (match) => {
             return match + "[^:]*";
         });
+
         namespaces = namespaces.filter((name: string) => name.match(new RegExp("^" + expression)));
 
         if (!namespaces.length) {
@@ -311,6 +322,7 @@ export class Application implements ApplicationInterface {
         }
 
         const exact = namespaces.indexOf(namespace) !== -1;
+
         if (namespaces.length > 1 && !exact) {
             throw new RuntimeException(`The namespace "${namespace}" is ambiguous.`);
         }
@@ -327,6 +339,7 @@ export class Application implements ApplicationInterface {
 
         for (const command of this.all().values()) {
             const extractedNamespaces = this.extractAllNamespaces(command.getName());
+
             for (const namespace of extractedNamespaces) {
                 if (!namespaces.has(namespace)) {
                     namespaces.add(namespace);
@@ -335,6 +348,7 @@ export class Application implements ApplicationInterface {
 
             for (const alias of command.getAliases()) {
                 const extractedAliasNamespaces = this.extractAllNamespaces(alias);
+
                 for (const namespace of extractedAliasNamespaces) {
                     if (!namespaces.has(namespace)) {
                         namespaces.add(namespace);
@@ -357,6 +371,7 @@ export class Application implements ApplicationInterface {
 
         for (const [name, command] of this.commands.entries()) {
             const extractedNamespace = this.extractNamespace(name, namespace.split(":").length);
+
             if (namespace === extractedNamespace) {
                 commands.set(name, command);
             }
@@ -395,6 +410,7 @@ export class Application implements ApplicationInterface {
         }
 
         let shellVerbosity: number = Application.SHELL_VERBOSITY_NORMAL;
+
         if (input.hasParameterOption(["--quiet", "-q"], true)) {
             output.setVerbosity(OutputMode.VERBOSITY_QUIET);
             shellVerbosity = Application.SHELL_VERBOSITY_QUIET;
@@ -435,6 +451,7 @@ export class Application implements ApplicationInterface {
         if (this.singleCommand) {
             return this.defaultCommand;
         }
+
         return input.getFirstArgument();
 
     }
@@ -442,6 +459,7 @@ export class Application implements ApplicationInterface {
     protected async doRun(input: InputInterface, output: OutputInterface): Promise<number> {
         if (input.hasParameterOption(["--version", "-V"], true)) {
             output.writeln(this.getLongVersion());
+
             return 0;
         }
 
@@ -453,6 +471,7 @@ export class Application implements ApplicationInterface {
         }
 
         let name = this.getCommandName(input);
+
         if (input.hasParameterOption(["--help", "-h"], true)) {
             if (!name) {
                 name = "help";
@@ -469,6 +488,7 @@ export class Application implements ApplicationInterface {
             const commandArgument = new ArgumentDefinition("command", ArgumentMode.OPTIONAL, definition.getArgument("command").getDescription(), name);
             const args = Array.from(definition.getArguments().values());
             const commandArgumentIndex = args.findIndex(item => item.getName() === "command");
+
             if (-1 !== commandArgumentIndex) {
                 args[commandArgumentIndex] = commandArgument;
             }
@@ -478,8 +498,10 @@ export class Application implements ApplicationInterface {
 
         this.runningCommand = null;
         const command = this.find(name);
+
         this.runningCommand = command;
         const exitCode = await this.doRunCommand(command, input, output);
+
         this.runningCommand = null;
 
         return exitCode;
@@ -514,6 +536,7 @@ export class Application implements ApplicationInterface {
 
     private async doRunCommand(command: CommandInterface, input: InputInterface, output: OutputInterface) {
         const helperSet = command.getHelperSet();
+
         if (helperSet) {
             for (const helper of helperSet.getHelpers().values()) {
                 if (helper instanceof AbstractInputAwareHelper) {

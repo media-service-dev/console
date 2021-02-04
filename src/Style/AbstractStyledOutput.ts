@@ -8,6 +8,7 @@
  */
 
 import * as os from "os";
+
 import { OutputFormatterInterface } from "../Formatter/OutputFormatterInterface";
 import { ConsoleOutput } from "../Output/ConsoleOutput";
 import { OutputInterface } from "../Output/OutputInterface";

@@ -8,6 +8,7 @@
  */
 
 import each from "jest-each";
+
 import { ChoiceQuestion } from "../../src/Question/ChoiceQuestion";
 
 describe("ChoiceQuestion test", () => {
@@ -40,9 +41,11 @@ describe("ChoiceQuestion test", () => {
 
         for (const answer of answers) {
             const validator = question.getValidator();
+
             expect(validator).not.toBeNull();
             if (validator) {
                 const actual = validator(answer);
+
                 expect(actual).toEqual(expected);
             }
         }
@@ -58,6 +61,7 @@ describe("ChoiceQuestion test", () => {
         question.setTrimmable(false);
 
         const validator = question.getValidator();
+
         expect(validator).not.toBeNull();
         if (validator) {
             expect(validator("  Third response  ")).toBe("  Third response  ");

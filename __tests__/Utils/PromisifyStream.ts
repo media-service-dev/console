@@ -19,6 +19,7 @@ export function promisifyStream(stream: stream.Writable | stream.Readable) {
 
     return new Promise<string[]>((resolve) => {
         const data: string[] = [];
+
         stream.on("data", (chunk) => {
             data.push(chunk.toString());
         });

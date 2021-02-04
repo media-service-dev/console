@@ -24,6 +24,7 @@ export class ConsoleOutput extends StreamOutput implements ConsoleOutputInterfac
         super(process.stdout, verbosity, decorated, formatter);
 
         const actualDecorated = this.isDecorated();
+
         this.stderr = new StreamOutput(process.stderr, verbosity, decorated, this.getFormatter());
 
         if (null === decorated) {

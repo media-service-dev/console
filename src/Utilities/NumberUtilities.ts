@@ -63,6 +63,7 @@ export class NumberUtilities {
         if (/^[-+]?(\d+|Infinity)$/.test(value)) {
             return Number(value);
         }
+
         return NaN;
 
     }

@@ -29,6 +29,7 @@ export class Terminal {
      */
     public getWidth(): number {
         const width = process.env.COLUMNS ?? null;
+
         if (null !== width) {
             return parseInt(width.trim(), 10);
         }
@@ -47,6 +48,7 @@ export class Terminal {
      */
     public getHeight(): number {
         const height = process.env.ROWS ?? null;
+
         if (null !== height) {
             return parseInt(height.trim(), 10);
         }

@@ -13,7 +13,7 @@ import { InputAwareInterface } from "./InputAwareInterface";
 
 export abstract class AbstractInputAwareHelper extends AbstractHelper implements InputAwareInterface {
 
-    protected input: InputInterface;
+    protected input!: InputInterface;
 
     public setInput(input: InputInterface): void {
         this.input = input;

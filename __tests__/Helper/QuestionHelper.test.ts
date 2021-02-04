@@ -8,6 +8,7 @@
  */
 
 import each from "jest-each";
+
 import { ArgumentException } from "../../src/Exception/ArgumentException";
 import { LogicException } from "../../src/Exception/LogicException";
 import { RuntimeException } from "../../src/Exception/RuntimeException";
@@ -27,6 +28,7 @@ describe("QuestionHelper", () => {
     const questionHelper = new QuestionHelper();
     const helperSet = new HelperSet([new FormatterHelper()]);
     const heroes = ["Superman", "Batman", "Spiderman"];
+
     questionHelper.setHelperSet(helperSet);
 
     describe("Interactive", () => {
@@ -34,6 +36,7 @@ describe("QuestionHelper", () => {
         it("should handle enter press and default value", async () => {
             // Arrange
             const question = new ChoiceQuestion("What is your favorite superhero?", heroes, "Spiderman");
+
             question.setMaxAttempts(1);
 
             const input = createStreamableInputMock(createStream("\n"));
@@ -49,6 +52,7 @@ describe("QuestionHelper", () => {
         it("should handle input", async () => {
             // Arrange
             const question = new ChoiceQuestion("What is your favorite superhero?", heroes);
+
             question.setMaxAttempts(1);
             const input = createStreamableInputMock(createStream("Batman\n"));
             const output = createOutput();
@@ -63,6 +67,7 @@ describe("QuestionHelper", () => {
         it("should handle input with spaces", async () => {
             // Arrange
             const question = new ChoiceQuestion("What is your favorite superhero?", heroes);
+
             question.setMaxAttempts(1);
             const input = createStreamableInputMock(createStream("  Batman  \n"));
             const output = createOutput();
@@ -77,6 +82,7 @@ describe("QuestionHelper", () => {
         it("should handle bad input with custom message", async () => {
             // Arrange
             const question = new ChoiceQuestion("What is your favorite superhero?", heroes);
+
             question.setErrorMessage("Input \"%s\" is not a superhero!");
             question.setMaxAttempts(2);
 
@@ -89,6 +95,7 @@ describe("QuestionHelper", () => {
 
             // Assert
             const data = (output.getStream() as TesterDuplexStream).getContents().toString();
+
             expect(actual).toBe("Batman");
             expect(data).toContain("Input \"Foo\" is not a superhero!");
         });
@@ -96,6 +103,7 @@ describe("QuestionHelper", () => {
         it("should handle mutiple inputs with single select", async () => {
             // Arrange
             const question = new ChoiceQuestion("What is your favorite superhero?", heroes, null);
+
             question.setMaxAttempts(1);
             question.setMultiselect(true);
 
@@ -112,6 +120,7 @@ describe("QuestionHelper", () => {
         it("should handle mutiple inputs with multiple select", async () => {
             // Arrange
             const question = new ChoiceQuestion("What is your favorite superhero?", heroes, null);
+
             question.setMaxAttempts(1);
             question.setMultiselect(true);
 
@@ -128,6 +137,7 @@ describe("QuestionHelper", () => {
         it("should handle mutiple inputs with multiple select and spaces", async () => {
             // Arrange
             const question = new ChoiceQuestion("What is your favorite superhero?", heroes, null);
+
             question.setMaxAttempts(1);
             question.setMultiselect(true);
 
@@ -144,6 +154,7 @@ describe("QuestionHelper", () => {
         it("should handle mutiple inputs with enter and default values", async () => {
             // Arrange
             const question = new ChoiceQuestion("What is your favorite superhero?", heroes, "Superman,Batman");
+
             question.setMaxAttempts(1);
             question.setMultiselect(true);
 
@@ -160,6 +171,7 @@ describe("QuestionHelper", () => {
         it("should handle mutiple inputs with enter and default values with spaces", async () => {
             // Arrange
             const question = new ChoiceQuestion("What is your favorite superhero?", heroes, " Superman , Batman ");
+
             question.setMaxAttempts(1);
             question.setMultiselect(true);
 
@@ -193,6 +205,7 @@ describe("QuestionHelper", () => {
         it("should handle enter press and default value", async () => {
             // Arrange
             const question = new ChoiceQuestion("What is your favorite superhero?", heroes, "Superman");
+
             question.setMaxAttempts(1);
 
             const input = createStreamableInputMock(createStream("\n"), false);
@@ -208,6 +221,7 @@ describe("QuestionHelper", () => {
         it("should handle input with default value", async () => {
             // Arrange
             const question = new ChoiceQuestion("What is your favorite superhero?", heroes, "Batman");
+
             question.setMaxAttempts(1);
             const input = createStreamableInputMock(createStream("Batman\n"), false);
             const output = createOutput();
@@ -222,6 +236,7 @@ describe("QuestionHelper", () => {
         it("should handle input with null as default", async () => {
             // Arrange
             const question = new ChoiceQuestion("What is your favorite superhero?", heroes, null);
+
             question.setMaxAttempts(1);
             const input = createStreamableInputMock(createStream("  Batman  \n"), false);
             const output = createOutput();
@@ -236,6 +251,7 @@ describe("QuestionHelper", () => {
         it("should handle default value and null validator", async () => {
             // Arrange
             const question = new ChoiceQuestion("What is your favorite superhero?", heroes, "Superman");
+
             question.setValidator(null);
             const input = createStreamableInputMock(createStream("Foo\n"), false);
             const output = createOutput();
@@ -250,6 +266,7 @@ describe("QuestionHelper", () => {
         it("should handle default value input with multiple select", async () => {
             // Arrange
             const question = new ChoiceQuestion("What is your favorite superhero?", heroes, "Superman,Spiderman");
+
             question.setMaxAttempts(1);
             question.setMultiselect(true);
 
@@ -266,6 +283,7 @@ describe("QuestionHelper", () => {
         it("should handle default value input with multiple select and spaces", async () => {
             // Arrange
             const question = new ChoiceQuestion("What is your favorite superhero?", heroes, " Superman , Spiderman  ");
+
             question.setMaxAttempts(1);
             question.setMultiselect(true);
 
@@ -282,6 +300,7 @@ describe("QuestionHelper", () => {
         it("should handle mutiple inputs with enter and default values", async () => {
             // Arrange
             const question = new ChoiceQuestion("What is your favorite superhero?", heroes, "Superman,Batman");
+
             question.setMaxAttempts(1);
             question.setMultiselect(true);
 
@@ -323,6 +342,7 @@ describe("QuestionHelper", () => {
 
             // Assert
             const data = (output.getStream() as TesterDuplexStream).getContents().toString();
+
             expect(actual).toBe("8AM");
             expect(data).toContain("What time is it?");
         });
@@ -330,6 +350,7 @@ describe("QuestionHelper", () => {
         it("should handle simple question with no trimmed", async () => {
             // Arrange
             const question = new Question("What time is it?", "2PM");
+
             question.setTrimmable(false);
             const input = createStreamableInputMock(createStream("  8AM  "));
             const output = createOutput();
@@ -339,6 +360,7 @@ describe("QuestionHelper", () => {
 
             // Assert
             const data = (output.getStream() as TesterDuplexStream).getContents().toString();
+
             expect(actual).toBe("  8AM  ");
             expect(data).toContain("What time is it?");
         });
@@ -350,6 +372,7 @@ describe("QuestionHelper", () => {
         it("should work with hiden input", async () => {
             // Arrange
             const question = new Question("What time is it?");
+
             question.setHidden(true);
             const input = createStreamableInputMock(createStream("8AM\n"));
             const output = createOutput();
@@ -364,6 +387,7 @@ describe("QuestionHelper", () => {
         it("should work with hiden input and not trimmed", async () => {
             // Arrange
             const question = new Question("What time is it?");
+
             question.setHidden(true);
             question.setTrimmable(false);
             const input = createStreamableInputMock(createStream("  8AM  \n"));
@@ -379,6 +403,7 @@ describe("QuestionHelper", () => {
         it("should work with hidden input and trimmed", async () => {
             // Arrange
             const question = new Question("What time is it?");
+
             question.setHidden(true);
             const input = createStreamableInputMock(createStream("  8AM  \n"));
             const output = createOutput();
@@ -438,6 +463,7 @@ describe("QuestionHelper", () => {
             // Arrange
             const helper = new QuestionHelper();
             const helperSet = new HelperSet([new FormatterHelper()]);
+
             helper.setHelperSet(helperSet);
             const expectedError = "This is not a color!";
             const validator = (color: string | null) => {
@@ -448,6 +474,7 @@ describe("QuestionHelper", () => {
                 return color;
             };
             const question = new Question("What color has a white horse?", "white");
+
             question.setValidator(validator);
             question.setMaxAttempts(2);
             const input1 = createStream("\nblack\n");
@@ -480,12 +507,14 @@ describe("QuestionHelper", () => {
                 // Arrange
                 const helper = new QuestionHelper();
                 const helperSet = new HelperSet([new FormatterHelper()]);
+
                 helper.setHelperSet(helperSet);
                 const question = new ChoiceQuestion("Please select the environment to load", [
                     "My environment 1",
                     "My environment 2",
                     "My environment 3",
                 ]);
+
                 question.setMaxAttempts(1);
                 const output = createOutput();
 
@@ -504,11 +533,13 @@ describe("QuestionHelper", () => {
                 // Arrange
                 const helper = new QuestionHelper();
                 const helperSet = new HelperSet([new FormatterHelper()]);
+
                 helper.setHelperSet(helperSet);
                 const question = new ChoiceQuestion("Please select the directory", [
                     ".",
                     "src",
                 ]);
+
                 question.setMaxAttempts(1);
                 question.setMultiselect(true);
                 const output = createOutput();
@@ -532,6 +563,7 @@ describe("QuestionHelper", () => {
                 // Arrange
                 const helper = new QuestionHelper();
                 const helperSet = new HelperSet([new FormatterHelper()]);
+
                 helper.setHelperSet(helperSet);
                 const question = new ChoiceQuestion("Please select the environment to load", [
                     ["0", "No environment"],
@@ -539,6 +571,7 @@ describe("QuestionHelper", () => {
                     ["env_2", "My environment 2"],
                     ["3", "My environment 3"],
                 ]);
+
                 question.setMaxAttempts(1);
                 const output = createOutput();
 
@@ -559,12 +592,14 @@ describe("QuestionHelper", () => {
                 // Arrange
                 const helper = new QuestionHelper();
                 const helperSet = new HelperSet([new FormatterHelper()]);
+
                 helper.setHelperSet(helperSet);
                 const question = new ChoiceQuestion("Please select the environment to load", [
                     ["env_1", "My environment 1"],
                     ["env_2", "My environment"],
                     ["env_3", "My environment"],
                 ]);
+
                 question.setMaxAttempts(1);
                 const output = createOutput();
 
@@ -579,12 +614,14 @@ describe("QuestionHelper", () => {
             // Arrange
             const helper = new QuestionHelper();
             const helperSet = new HelperSet([new FormatterHelper()]);
+
             helper.setHelperSet(helperSet);
             const question = new ChoiceQuestion("Please select the environment to load", [
                 ["env_1", "My first environment"],
                 ["env_2", "My environment"],
                 ["env_3", "My environment"],
             ]);
+
             question.setMaxAttempts(1);
             const output = createOutput();
 
@@ -643,6 +680,7 @@ describe("QuestionHelper", () => {
         // Arrange
         const helper = new QuestionHelper();
         const question = new Question<string>("Whats your name?");
+
         question.setValidator((value: string | null) => {
             if (!value) {
                 throw new Error("A value is required");
@@ -675,6 +713,7 @@ describe("QuestionHelper", () => {
         const question0 = new Question("File?");
         const question1 = new Question("Password?");
         const question2 = new ConfirmationQuestion("Should you do? (Y/n)");
+
         question1.setHidden(true);
         question0.setPrompt("File: ");
         question1.setPrompt("Password: ");

@@ -49,6 +49,7 @@ describe("InputDefinition", () => {
 
             // Assert
             const actual = definition.getArguments();
+
             expect(Array.from(actual.entries())).toEqual([]);
         });
 
@@ -58,6 +59,7 @@ describe("InputDefinition", () => {
 
             // Assert
             const actual = Array.from(definition.getArguments());
+
             expect(actual).toEqual([["foo", fooArgument], ["bar", barArgument]]);
         });
 
@@ -67,6 +69,7 @@ describe("InputDefinition", () => {
 
             // Assert
             const actual = definition.getOptions();
+
             expect(Array.from(actual.entries())).toEqual([]);
         });
 
@@ -76,6 +79,7 @@ describe("InputDefinition", () => {
 
             // Assert
             const actual = Array.from(definition.getOptions());
+
             expect(actual).toEqual([["foo", fooOption], ["bar", barOption]]);
         });
 
@@ -92,6 +96,7 @@ describe("InputDefinition", () => {
 
             // Assert
             const actual = Array.from(definition.getArguments());
+
             expect(actual).toEqual([["foo", fooArgument]]);
         });
 
@@ -105,6 +110,7 @@ describe("InputDefinition", () => {
 
             // Assert
             const actual = Array.from(definition.getArguments());
+
             expect(actual).toEqual([["bar", barArgument]]);
         });
 
@@ -121,6 +127,7 @@ describe("InputDefinition", () => {
 
             // Assert
             const actual = Array.from(definition.getArguments());
+
             expect(actual).toEqual([["foo", fooArgument]]);
         });
 
@@ -134,6 +141,7 @@ describe("InputDefinition", () => {
 
             // Assert
             const actual = Array.from(definition.getArguments());
+
             expect(actual).toEqual([["foo", fooArgument], ["bar", barArgument]]);
         });
 
@@ -149,6 +157,7 @@ describe("InputDefinition", () => {
 
             // Assert
             const actual = Array.from(definition.getArguments());
+
             expect(actual).toEqual([["foo", fooArgument]]);
         });
 
@@ -162,12 +171,14 @@ describe("InputDefinition", () => {
 
             // Assert
             const actual = Array.from(definition.getArguments());
+
             expect(actual).toEqual([["foo", fooArgument], ["bar", barArgument]]);
         });
 
         it("should not takes arguments with same name", () => {
             // Arrange
             const definition = new InputDefinition();
+
             definition.addArgument(fooArgument);
 
             // Act & Assert
@@ -179,6 +190,7 @@ describe("InputDefinition", () => {
         it("should not take array as not last argument", () => {
             // Arrange
             const definition = new InputDefinition();
+
             definition.addArgument(new ArgumentDefinition("fooarray", ArgumentMode.IS_ARRAY));
 
             // Act & Assert
@@ -190,6 +202,7 @@ describe("InputDefinition", () => {
         it("should not take required after optional one", () => {
             // Arrange
             const definition = new InputDefinition();
+
             definition.addArgument(fooArgument);
 
             // Act & Assert
@@ -204,6 +217,7 @@ describe("InputDefinition", () => {
         it("should returns a ArgumentDefinition by its name", () => {
             // Arrange
             const definition = new InputDefinition();
+
             definition.addArgument(fooArgument);
 
             // Act
@@ -216,6 +230,7 @@ describe("InputDefinition", () => {
         it("should throw on invalid argument", () => {
             // Arrange
             const definition = new InputDefinition();
+
             definition.addArgument(fooArgument);
 
             // Act & Assert
@@ -230,6 +245,7 @@ describe("InputDefinition", () => {
         it("should return true if a ArgumentDefinition exists for given name", () => {
             // Arrange
             const definition = new InputDefinition();
+
             definition.addArgument(fooArgument);
 
             // Act
@@ -242,6 +258,7 @@ describe("InputDefinition", () => {
         it("should return false if a ArgumentDefinition does not exist for given name", () => {
             // Arrange
             const definition = new InputDefinition();
+
             definition.addArgument(fooArgument);
 
             // Act
@@ -271,6 +288,7 @@ describe("InputDefinition", () => {
         it("should return the correct number of required count with more than one argument", () => {
             // Arrange
             const definition = new InputDefinition();
+
             definition.addArgument(foo2Argument);
 
             // Act
@@ -298,6 +316,7 @@ describe("InputDefinition", () => {
         it("should returns the correct number of arguments with multiple arguments", () => {
             // Arrange
             const definition = new InputDefinition();
+
             definition.addArgument(foo2Argument);
 
             // Act
@@ -365,6 +384,7 @@ describe("InputDefinition", () => {
         it("should throw if the options got cleared", () => {
             // Arrange
             const definition = new InputDefinition([fooOption]);
+
             definition.setOptions([barOption]);
 
             // Act & Assert
@@ -409,6 +429,7 @@ describe("InputDefinition", () => {
         it("should adds another OptionDefinition object", () => {
             // Arrange
             const definition = new InputDefinition();
+
             definition.addOption(fooOption);
 
             // Act
@@ -421,6 +442,7 @@ describe("InputDefinition", () => {
         it("should not add option with same name", () => {
             // Arrange
             const definition = new InputDefinition();
+
             definition.addOption(fooOption);
 
             // Act & Assert
@@ -432,6 +454,7 @@ describe("InputDefinition", () => {
         it("should not add same shortcut again", () => {
             // Arrange
             const definition = new InputDefinition();
+
             definition.addOption(fooOption);
 
             // Act & Assert

@@ -13,9 +13,9 @@ import { OutputInterface } from "../../../src/Output/OutputInterface";
 
 export class FooSubnamespaced1Command extends Command {
 
-    public input: InputInterface;
+    public input!: InputInterface;
 
-    public output: OutputInterface;
+    public output!: OutputInterface;
 
     protected configure(): void {
         this.setName("foo:bar:baz")

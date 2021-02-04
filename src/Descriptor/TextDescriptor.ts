@@ -24,6 +24,7 @@ export class TextDescriptor extends AbstractDescriptor<TextDescriptorOptions> {
 
     protected describeArgumentDefinition(argument: ArgumentDefinition, options: TextDescriptorOptions) {
         let defaultValue = "";
+
         if (null !== argument.getDefault() && (!Array.isArray(argument.getDefault()) || argument.getDefault().length)) {
             defaultValue = `<comment> [default: ${this.getFormatedValue(argument.getDefault())}]</comment>`;
         }
@@ -58,9 +59,11 @@ export class TextDescriptor extends AbstractDescriptor<TextDescriptorOptions> {
 
         if (inputDefinition.getOptions().size) {
             const laterOptions: OptionDefinition[] = [];
+
             this.writeText("<comment>Options:</comment>", options);
             for (const option of inputDefinition.getOptions().values()) {
                 const shortcut = option.getShortcut();
+
                 if (shortcut && shortcut.length > 0) {
                     laterOptions.push(option);
                     continue;
@@ -86,11 +89,13 @@ export class TextDescriptor extends AbstractDescriptor<TextDescriptorOptions> {
 
             for (const command of applicationDescription.getCommands().values()) {
                 const spaces = width - command.getName().length;
+
                 this.writeText(`${command.getName()}${" ".repeat(spaces)}${command.getDescription()}`);
                 this.writeText("\n");
             }
         } else {
             const help = application.getHelp();
+
             if (help.length > 0) {
                 this.writeText(`${help}\n\n`, options);
             }
@@ -99,14 +104,17 @@ export class TextDescriptor extends AbstractDescriptor<TextDescriptorOptions> {
             this.writeText("  command [options] [arguments]\n\n", options);
 
             const optionDefinitions = Array.from(application.getDefinition().getOptions().values());
+
             this.describeInputDefinition(new InputDefinition(optionDefinitions), options);
             this.writeText("\n");
             this.writeText("\n");
 
             const commands = applicationDescription.getCommands();
             const namespaces = applicationDescription.getNamespaces();
+
             if (describedNamespace && namespaces.size > 0) {
                 const [namespace] = Array.from(namespaces.values());
+
                 for (const name of namespace.commands) {
                     commands.set(name, applicationDescription.getCommand(name));
                 }
@@ -145,11 +153,13 @@ export class TextDescriptor extends AbstractDescriptor<TextDescriptorOptions> {
                     this.writeText("\n");
                     const spacingWidth = width - name.length;
                     const command = commands.get(name);
+
                     if (command) {
                         const commandAliases = name === command.getName()
                             ? this.getCommandAliasesText(command)
                             : "";
                         const commandDescription: string = command.getDescription() ?? "";
+
                         this.writeText(`  <info>${name}</info>${" ".repeat(spacingWidth)}${commandAliases + commandDescription}`, options);
                     }
                 }
@@ -165,6 +175,7 @@ export class TextDescriptor extends AbstractDescriptor<TextDescriptorOptions> {
         command.mergeApplicationDefinition(false);
 
         const description = command.getDescription();
+
         if (description && description.length > 0) {
             this.writeText("<comment>Description:</comment>", options);
             this.writeText("\n");
@@ -174,6 +185,7 @@ export class TextDescriptor extends AbstractDescriptor<TextDescriptorOptions> {
 
         this.writeText("<comment>Usage:</comment>", options);
         const usages = [command.getSynopsis(true), ...command.getAliases(), ...command.getUsages()];
+
         for (const usage of usages) {
             this.writeText("\n");
             this.writeText("  " + OutputFormatter.escapeBackslashes(usage), options);
@@ -182,6 +194,7 @@ export class TextDescriptor extends AbstractDescriptor<TextDescriptorOptions> {
         this.writeText("\n");
 
         const definition = command.getNativeDefinition();
+
         if (definition.getOptions().size || definition.getArguments().size) {
             this.writeText("\n");
             this.describeInputDefinition(definition, options);
@@ -189,6 +202,7 @@ export class TextDescriptor extends AbstractDescriptor<TextDescriptorOptions> {
         }
 
         const help = command.getProcessedHelp();
+
         if (help && help !== description) {
             this.writeText("\n");
             this.writeText("<comment>Help:</comment>", options);
@@ -202,11 +216,13 @@ export class TextDescriptor extends AbstractDescriptor<TextDescriptorOptions> {
     protected describeOptionDefinition(optionDefinition: OptionDefinition, options: TextDescriptorOptions) {
         let defaultValue = "";
         const optionDefault = optionDefinition.getDefault();
+
         if (optionDefinition.acceptValue() && null !== optionDefault && (!Array.isArray(optionDefault) || optionDefault.length)) {
             defaultValue = `<comment> [default: ${this.getFormatedValue(optionDefault)}]</comment>`;
         }
 
         let value = "";
+
         if (optionDefinition.acceptValue()) {
             value = "=" + optionDefinition.getName().toUpperCase();
 
@@ -266,8 +282,10 @@ export class TextDescriptor extends AbstractDescriptor<TextDescriptorOptions> {
             let nameLength = 1 + (shortcut
                 ? shortcut.length
                 : 1) + 4 + optionDefinition.getName().length;
+
             if (optionDefinition.acceptValue()) {
                 let valueLength = 1 + optionDefinition.getName().length;
+
                 if (optionDefinition.isValueOptional()) {
                     valueLength += 2;
                 } else {
@@ -307,6 +325,7 @@ export class TextDescriptor extends AbstractDescriptor<TextDescriptorOptions> {
     private getCommandAliasesText(command: CommandInterface) {
         let text = "";
         const aliases = command.getAliases();
+
         if (aliases.length > 0) {
             text = `[${aliases.join("|")}] `;
         }
