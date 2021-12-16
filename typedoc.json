@@ -1,4 +1,6 @@
 {
-  "mode": "file",
-  "out": "docs"
+  "out": "docs",
+  "validation": {
+    "invalidLink": true
+  }
 }
