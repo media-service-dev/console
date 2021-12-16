@@ -12,14 +12,14 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
 
-      - name: Use Node.js 12
+      - name: Use Node.js 16
         uses: actions/setup-node@v1
         with:
-          node-version: 12
+          node-version: 16
 
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
@@ -29,9 +29,9 @@ jobs:
         id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
         with:
           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ubuntu-18.04-yarn-1-${{ hashFiles('**/yarn.lock') }}
+          key: ubuntu-20.04-yarn-1-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
-            ubuntu-18.04-yarn-1-
+            ubuntu-20.04-yarn-1-
 
       - run: yarn
 
