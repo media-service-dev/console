@@ -136,9 +136,11 @@ export class Application implements ApplicationInterface {
                 throw exception;
             }
 
-            this.writeException(output, exception);
+            const error = exception instanceof ConsoleException ? exception : new ConsoleException(exception instanceof Error ? exception.message : JSON.stringify(exception), 1);
 
-            exitCode = exception?.exitCode ?? 1;
+            this.writeException(output, error);
+
+            exitCode = error.exitCode ?? 1;
             if (!NumberUtilities.isIntStrict(exitCode)) {
                 exitCode = NumberUtilities.parseIntStrict(exitCode);
                 if (isNaN(exitCode)) {

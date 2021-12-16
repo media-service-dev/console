@@ -276,8 +276,10 @@ export class QuestionHelper extends AbstractHelper {
             } catch (exception) {
                 if (exception instanceof RuntimeException) {
                     throw exception;
-                } else {
+                } else if (exception instanceof Error) {
                     error = exception;
+                } else {
+                    error = new RuntimeException(JSON.stringify(exception), 1);
                 }
             }
         }
